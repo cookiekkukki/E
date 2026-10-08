@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0d1017">
+<title>게이트 이후 · 헌터와 에고웨폰 아카이브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --bg:#0b0e14;--bg2:#121722;--bg3:#181f2e;--line:#252d3d;--line-light:#354056;
+  --ink:#e4e7ed;--mute:#8892a4;--core:#63d6e8;--sun:#f2b630;
+  --sans:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Noto Sans KR","Malgun Gothic",system-ui,sans-serif;--serif:var(--sans);
+  box-sizing:border-box;
+}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.8 var(--sans);word-break:keep-all;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--core);outline-offset:3px}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* 상단 네비게이션 및 프로그레스 바 */
+nav{position:sticky;top:0;z-index:50;background:rgba(11,14,20,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:20px;align-items:center;height:58px;overflow-x:auto;white-space:nowrap}
+nav b{font:900 15px var(--serif);letter-spacing:.08em;margin-right:auto;color:var(--ink)}
+nav b small{font-size:11px;color:var(--mute);font-weight:400;margin-left:8px}
+nav a{font-size:13px;color:var(--mute);transition:color .2s}
+nav a:hover{color:var(--core)}
+.prog{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--core)}
+
+/* Hero Header & 애니메이션 */
+.hero{padding:110px 0 90px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;background:radial-gradient(circle at 80% 20%, rgba(99,214,232,.05) 0%, transparent 60%)}
+.hero-tag{font-size:12px;color:var(--core);letter-spacing:.2em;text-transform:uppercase;font-weight:700;margin-bottom:12px}
+h1{font:900 clamp(36px,7vw,72px)/1.15 var(--serif);margin:0 0 20px;letter-spacing:-.02em}
+h1 small{display:block;font:400 clamp(16px,2.2vw,20px)/1.6 var(--serif);color:var(--mute);margin-top:20px}
+
+/* Hero 내부 요소 진입 애니메이션 */
+.hero .wrap>*:not(.core){animation:up .8s cubic-bezier(.2,.7,.2,1) both}
+.hero .hero-tag{animation-delay:.1s}
+.hero h1{animation-delay:.25s}
+.hero .lead{animation-delay:.5s}
+.hero .btn-group{animation-delay:.65s}
+.hero .stats{animation-delay:.8s}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* 코어 오라 파동 애니메이션 */
+.core{position:absolute;right:max(6vw,24px);top:90px;width:280px;height:280px;pointer-events:none}
+.core i{position:absolute;inset:0;border:1px solid var(--core);border-radius:50%;opacity:0;animation:ring 5.4s cubic-bezier(.2,.6,.3,1) infinite}
+.core i:nth-child(2){animation-delay:1.8s}
+.core i:nth-child(3){animation-delay:3.6s}
+.core b{position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px;border-radius:50%;background:var(--core);box-shadow:0 0 28px 8px rgba(99,214,232,.45);animation:beat 2.7s ease-in-out infinite}
+@keyframes ring{0%{transform:scale(.1);opacity:.7}100%{transform:scale(1.5);opacity:0}}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.5)}}
+
+/* 타이핑 커서 스타일 */
+.typing-cursor{display:inline-block;width:3px;height:1em;background-color:var(--core);vertical-align:-0.1em;margin-left:4px;animation:blink 0.8s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.lead{max-width:38em;color:#b0b8c8;font-size:16px;margin-bottom:32px}
+.btn-group{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;padding:12px 26px;border:1px solid var(--core);color:var(--core);font-size:14px;font-weight:500;letter-spacing:.04em;cursor:pointer;transition:all .25s}
+.btn:hover{background:var(--core);color:var(--bg)}
+.btn.alt{border-color:var(--line-light);color:var(--ink)}
+.btn.alt:hover{border-color:var(--ink);background:transparent}
+
+/* Stats */
+.stats{display:flex;flex-wrap:wrap;margin-top:48px;max-width:640px;border-top:1px solid var(--line-light)}
+.stats div{position:relative;padding:18px 30px 0 0;margin-right:30px;font-size:12px;color:var(--mute)}
+.stats div:not(:last-child)::after{content:"";position:absolute;right:0;top:20px;bottom:0;width:1px;background:var(--line)}
+.stats b{display:block;font:900 24px/1.2 var(--serif);color:var(--ink);margin-bottom:2px}
+
+/* Section Common */
+section{padding:96px 0;border-bottom:1px solid var(--line)}
+.sec-head{margin-bottom:48px}
+.sec-head .num{font-size:12px;letter-spacing:.2em;color:var(--core);font-weight:700;display:block;margin-bottom:6px}
+.sec-head .num::after{content:"";display:inline-block;width:44px;height:1px;background:var(--core);vertical-align:middle;margin-left:14px;opacity:.6}
+.sec-head h2{font:900 clamp(26px,4vw,38px)/1.25 var(--serif);margin:0 0 12px}
+.sec-head p{color:var(--mute);margin:0;max-width:38em;font-size:15px}
+
+/* 인물도감 전용 선 없는 섹션 스타일 */
+section#roster{border-top:none}
+
+/* 스크롤 감지 reveal 스타일 */
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .rv.on{opacity:1;transform:none}
+
+/* Timeline */
+.tl{list-style:none;margin:0;padding:0 0 0 24px;border-left:1px solid var(--line)}
+.tl li{position:relative;padding:0 0 28px 22px;display:grid;grid-template-columns:84px 1fr;gap:12px}
+.tl li::before{content:"";position:absolute;left:-29px;top:10px;width:9px;height:9px;background:var(--bg);border:1px solid var(--core);border-radius:50%}
+.tl li.hot::before{background:var(--sun);border-color:var(--sun)}
+.tl b{font:700 15px var(--serif);color:var(--core)}.tl li.hot b{color:var(--sun)}
+.tl span{color:#c0c6d4;font-size:15px}
+
+/* Gate 2-Column Comparison & 마우스오버 애니메이션 */
+.dual-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-bottom:56px}
+.dual-card{padding:0 36px 0 0;position:relative}
+.dual-card+.dual-card{padding:0 0 0 36px;border-left:1px solid var(--line)}
+.dual-card::before{content:"";display:block;width:28px;height:2px;background:var(--core);margin-bottom:18px;transition:width .3s}
+.dual-card:hover::before{width:64px}
+.dual-card .badge{font-size:11px;letter-spacing:.15em;color:var(--core);font-weight:700;display:block;margin-bottom:8px}
+.dual-card h3{font:700 20px/1.3 var(--serif);margin:0 0 12px;color:var(--ink)}
+.dual-card p{color:#a0aab8;font-size:14px;margin:0}
+@media(max-width:720px){
+  .dual-card,.dual-card+.dual-card{padding:0;border-left:0}
+  .dual-card+.dual-card{border-top:1px solid var(--line);padding-top:28px;margin-top:28px}
+}
+
+.flow-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px;border-top:1px solid var(--line-light);padding-top:24px}
+.flow-box div{position:relative;font-size:14px;color:#b0b8c8}
+.flow-box div::before{content:"";position:absolute;left:0;top:-29px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:1px solid var(--core)}
+.flow-box b{display:block;font:700 15px var(--serif);color:var(--ink);margin-bottom:6px}
+
+/* Ladder (헌터 등급) */
+.ladder-wrap{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:24px;border-bottom:1px solid var(--line)}
+.ladder-wrap button{font:700 18px var(--serif);width:52px;height:48px;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;color:var(--mute);cursor:pointer;transition:color .2s,border-color .2s}
+.ladder-wrap button:hover{color:var(--ink)}
+.ladder-wrap button[aria-pressed=true]{border-bottom-color:var(--core);color:var(--core)}
+.ladder-wrap button.s{color:var(--sun)}
+.ladder-wrap button.s[aria-pressed=true],.ladder-wrap button.f[aria-pressed=true]{border-bottom-color:var(--sun);color:var(--sun)}
+
+#gtxt{border-left:3px solid var(--core);padding:18px 24px;color:#c0c6d4;background:rgba(255,255,255,.01);transition:all .2s;font-size:15px;line-height:1.7}
+#gtxt.s{border-color:var(--sun);background:rgba(242,182,48,.02)}
+#gtxt.f{border-color:var(--sun)}
+#gtxt h4{margin:0 0 8px;font-family:var(--serif);font-size:20px;color:var(--ink);display:flex;align-items:center;gap:12px}
+#gtxt ul{list-style:none;margin:0;padding:0}
+#gtxt li{position:relative;padding-left:16px}
+#gtxt li+li{margin-top:4px}
+#gtxt li::before{content:"·";position:absolute;left:3px;color:var(--core);font-weight:900}
+#gtxt.s li::before,#gtxt.f li::before{color:var(--sun)}
+#gtxt h4 span.pts{font-size:13px;color:var(--core);font-family:var(--sans);letter-spacing:.04em}
+#gtxt h4 span.pts::before{content:"";display:inline-block;width:24px;height:1px;background:currentColor;vertical-align:middle;margin-right:10px;opacity:.7}
+#gtxt.s h4 span.pts{color:var(--sun)}
+
+/* 게이트 난이도 카드 그리드 */
+.gate-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:40px}
+.gate-card{border-top:1px solid var(--line-light);padding:18px 0 0;position:relative}
+.gate-card::before{content:"";position:absolute;left:0;top:-1px;width:36px;height:2px;background:var(--core);transition:width .3s}
+.gate-card:hover::before{width:100%}
+.gate-card.s-rank::before{background:var(--sun)}
+.gate-card .g-header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px}
+.gate-card .g-rank{font:900 24px var(--serif);color:var(--core)}
+.gate-card.s-rank .g-rank{color:var(--sun)}
+.gate-card .g-dmg{font-size:12px;color:var(--mute)}
+.gate-card ul{list-style:none;padding:0;margin:0;font-size:14px;color:#b0b8c8}
+.gate-card li{margin-bottom:8px;display:flex;gap:8px}
+.gate-card li strong{color:var(--ink);min-width:72px;font-weight:500}
+
+/* 05. 도시를 움직이는 세력 */
+.faction-list{display:flex;flex-direction:column}
+.faction-card{display:grid;grid-template-columns:60px 1fr;border-top:1px solid var(--line);padding:32px 0;cursor:pointer;position:relative}
+.faction-card:last-child{border-bottom:1px solid var(--line)}
+.faction-card::before{content:"";position:absolute;left:0;top:-1px;width:48px;height:2px;background:var(--c, var(--core));transition:width .35s cubic-bezier(.2,.7,.2,1)}
+.faction-card:hover::before{width:140px}
+.faction-card:hover h3{color:var(--c, var(--core))}
+.faction-body h3{transition:color .25s}
+.faction-meta{display:block;font-size:12px;color:var(--mute);letter-spacing:.02em}
+.faction-num{font:700 20px var(--serif);color:var(--mute);opacity:.6}
+.faction-body h3{font:700 22px/1.3 var(--serif);margin:0 0 6px;color:var(--ink)}
+.faction-body h3 small{font-size:13px;color:var(--mute);font-weight:400;margin-left:8px;letter-spacing:.05em}
+.faction-body .sub-tag{font-size:12px;color:var(--c, var(--core));margin-bottom:10px;font-weight:500}
+.faction-body p{color:#a8b2c2;font-size:15px;margin:0 0 16px;line-height:1.7}
+
+/* 06. 헌터의 일상 */
+.district-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px}
+.district-card{border-top:1px solid var(--line-light);padding:20px 0 0;position:relative}
+.district-card::before{content:"";position:absolute;left:0;top:-1px;width:36px;height:2px;background:var(--core);transition:width .3s}
+.district-card:hover::before{width:100%}
+.district-card .num{font-size:12px;color:var(--core);font-weight:700;display:block;margin-bottom:8px}
+.district-card h3{font:700 19px var(--serif);margin:0 0 10px}
+.district-card p{font-size:14px;color:#a0aab8;margin:0 0 18px}
+.chip-group{display:flex;flex-wrap:wrap;gap:4px 16px}
+.chip-group span{font-size:12px;color:var(--mute)}
+.chip-group span::before{content:"# ";color:var(--core);opacity:.7}
+
+/* 07. 등장 도감 (Roster & Card 애니메이션) */
+.tabs{display:flex;gap:4px 24px;flex-wrap:wrap;margin-bottom:40px;border-bottom:1px solid var(--line)}
+.tabs button{font:500 14px var(--sans);padding:10px 2px;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;color:var(--mute);cursor:pointer;transition:color .2s,border-color .2s}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected=true]{border-bottom-color:var(--core);color:var(--core)}
+.roster{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:32px 26px}
+.rc{--c:var(--core);--k:18px;position:relative;aspect-ratio:3/4;overflow:hidden;cursor:pointer;
+  background:linear-gradient(160deg,rgba(255,255,255,.03),transparent 55%),repeating-linear-gradient(0deg,transparent 0 31px,rgba(255,255,255,.028) 31px 32px);
+  animation:pop .45s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--d,0s);transition:transform .25s}
+@keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+/* 모서리 괄호선 */
+.rc::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;opacity:.5;transition:opacity .25s;
+  background:
+   linear-gradient(var(--c),var(--c)) top left/var(--k) 1px,
+   linear-gradient(var(--c),var(--c)) top left/1px var(--k),
+   linear-gradient(var(--c),var(--c)) top right/var(--k) 1px,
+   linear-gradient(var(--c),var(--c)) top right/1px var(--k),
+   linear-gradient(var(--c),var(--c)) bottom left/var(--k) 1px,
+   linear-gradient(var(--c),var(--c)) bottom left/1px var(--k),
+   linear-gradient(var(--c),var(--c)) bottom right/var(--k) 1px,
+   linear-gradient(var(--c),var(--c)) bottom right/1px var(--k);
+  background-repeat:no-repeat}
+.rc:hover::before,.rc:focus-visible::before{opacity:.9}
+.rc::after{content:"";position:absolute;left:0;top:34%;width:2px;height:18%;background:var(--c);opacity:.7;z-index:3}
+.rc .top{text-shadow:0 1px 6px rgba(0,0,0,.8);position:absolute;left:16px;right:16px;top:16px;display:flex;align-items:center;gap:10px;font:500 11px var(--sans);letter-spacing:.14em;color:var(--mute);z-index:2}
+.rc .top i{flex:1;height:1px;background:linear-gradient(90deg,var(--line-light),transparent)}
+.rc .pic{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.rc .meta{position:absolute;left:0;right:0;bottom:0;padding:34px 18px 18px;background:linear-gradient(transparent,rgba(11,14,20,.95) 40%)}
+.rc small{font-size:11px;color:var(--c);display:block;margin-bottom:4px;letter-spacing:.02em}
+.rc h3{margin:0;font:700 19px var(--serif)}
+.rc .rule{display:block;position:relative;height:1px;margin:10px 0 9px;background:linear-gradient(90deg,var(--c),transparent 85%)}
+.rc .rule::before{content:"";position:absolute;left:0;top:-2px;width:5px;height:5px;background:var(--c);transform:rotate(45deg)}
+.rc p{margin:0;font-size:13px;color:var(--mute)}
+
+/* 모달 팝업 */
+.modal-overlay{position:fixed;inset:0;background:rgba(7,9,14,.88);backdrop-filter:blur(8px);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.modal-overlay.active{opacity:1;pointer-events:auto}
+.modal-box{background:var(--bg2);border:1px solid var(--line-light);max-width:580px;width:100%;position:relative;box-shadow:0 24px 48px rgba(0,0,0,.7);transform:translateY(20px);transition:transform .3s ease;max-height:85vh;overflow-y:auto;overflow-x:hidden}
+.modal-overlay.active .modal-box{transform:translateY(0)}
+
+/* 팝업 상단 가로형 Banner 이미지 영역 */
+.modal-header-img{width:100%;height:240px;object-fit:cover;display:block;border-bottom:1px solid var(--line)}
+
+.modal-content{padding:28px 32px 36px}
+.modal-close{position:absolute;top:14px;right:14px;background:rgba(11,14,20,.6);border:1px solid var(--line-light);color:var(--ink);font-size:22px;cursor:pointer;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;line-height:1;z-index:10;transition:all .2s}
+.modal-close:hover{color:var(--core);border-color:var(--core);background:rgba(11,14,20,.9)}
+.modal-tag{font-size:12px;color:var(--core);margin-bottom:8px;letter-spacing:.1em;font-weight:700}
+.modal-title{font:900 28px/1.2 var(--serif);margin:0 0 16px;color:var(--ink)}
+.modal-desc{color:#b4becd;font-size:15px;line-height:1.75;margin-bottom:20px;white-space:pre-line}
+.modal-quote{border-left:3px solid var(--core);padding:12px 18px;background:rgba(99,214,232,.04);font:500 15px/1.6 var(--serif);color:var(--ink);margin-bottom:20px}
+.modal-action{margin-top:24px;border-top:0px solid var(--line);padding-top:12px;display:flex;justify-content:flex-end}
+.btn-roster-link{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:0;background:none;border:0;color:var(--core);font-size:14px;line-height:1;cursor:pointer;transition:transform .2s,color .2s}
+.btn-roster-link span{font-size:14px}
+.btn-roster-link:hover{background:none;color:var(--ink);transform:translate(2px,2px)}
+
+footer{padding:60px 0;text-align:center;color:var(--mute);font-size:13px;border-top:1px solid var(--line)}
+footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:none;margin-bottom:20px}
+
+@media(max-width:600px){
+  .core{width:170px;height:170px;top:60px;opacity:.5}
+  .faction-card{grid-template-columns:1fr;gap:8px}
+  .faction-num{display:none}
+  section{padding:64px 0}
+  .tl li{grid-template-columns:1fr;gap:0}
+  .modal-header-img{height:160px}
+  .modal-content{padding:20px 24px 28px}
+  .gate-card .g-header{flex-direction:column;align-items:flex-start;gap:6px}
+}
+@media(prefers-reduced-motion:reduce){
+  .core i,.core b,.hero .wrap>*, .rc{animation:none}
+  .js .rv{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="prog" id="prog"></div>
+  <div class="wrap">
+    <b>GATE ARCHIVE<small>황혼의 기록</small></b>
+    <a href="#world">세계관</a>
+    <a href="#gate">게이트</a>
+    <a href="#gate-difficulty">난이도</a>
+    <a href="#rank">승급기준</a>
+    <a href="#e">에고웨폰</a>
+    <a href="#guilds">세력</a>
+    <a href="#life">일상</a>
+    <a href="#roster">도감</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="core" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+    <div class="hero-tag">THE URBAN FANTASY ARCHIVE</div>
+    <h1><span id="typing-title"></span><span class="typing-cursor"></span><small>마력으로 싸우고, 밥을 먹으며 회복하고,<br>무기와 마음을 나누는 헌터들의 기록.</small></h1>
+    <p class="lead">던전을 토벌하는 날도, 반지하 길드에서 잡일을 하는 날도 있다. 그리고 어느 날, 손에 쥔 무기가 말을 걸어온다.</p>
+    <div class="btn-group">
+      <a class="btn" href="#world">세계관 열람하기</a>
+      <a class="btn alt" href="#roster">도감 보기</a>
+    </div>
+    <div class="stats">
+      <div><b>7</b>등급 S~F</div>
+      <div><b>4</b>핵심 세력</div>
+      <div><b>에고웨폰</b>깨어난 무기</div>
+      <div><b>25일</b>월간 갱신</div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 01. 세계관 연표 -->
+  <section id="world">
+    <div class="sec-head">
+      <span class="num">01 / THE CHRONICLE</span>
+      <h2>세계관 연표</h2>
+      <p>2012년 서해 상공의 균열에서 시작된 변화. 무기에 자아가 있다는 사실이 정설이 되기까지의 기록.</p>
+    </div>
+    <ul class="tl">
+      <li class="hot"><b>2012</b><span>인천게이트와 최초 균열. 서해 상공에 첫 출현, 군 화력은 무효. 각성자가 발현하고 ‘헌터’라 명명됨.</span></li>
+      <li><b>2013</b><span>게이트 생존자·접촉자 중심으로 초인 능력이 발현. 통제 불가 시기.</span></li>
+      <li><b>2014</b><span>제2차 대개방. 전국에서 게이트 발생.</span></li>
+      <li><b>2015</b><span>S~F 7단계 등급제 확립. 전투력·실적 기준으로 공개 평가하며 관리는 길드에 위탁.</span></li>
+      <li><b>2016–2022</b><span>구천검문, 청연상단, 아스트라인 등 다양한 길드 개설.</span></li>
+      <li class="hot"><b>2023</b><span>첫 에고웨폰 등장 (태산).</span></li>
+      <li class="hot"><b>2024</b><span>‘무기 자아’ 학설 발표. 본래 존재하며 수면 중이고 각성은 극히 드문 사건. 청연 S급 장인의 발표로 정설이 됨.</span></li>
+      <li><b>2024–2026</b><span>각성 붐과 실패담 속출. 위험을 자초하는 각성 시도, 게이트 폭주 유도 사고가 이어진다.</span></li>
+    </ul>
+  </section>
+
+  <!-- 02. 게이트와 마력 -->
+  <section id="gate">
+    <div class="sec-head">
+      <span class="num">02 / GATE & MANA</span>
+      <h2>게이트와 마력</h2>
+      <p>던전 깊은 곳의 코어와 헌터 생명력의 본질.</p>
+    </div>
+    <div class="dual-cards">
+      <div class="dual-card">
+        <span class="badge">CORE & DUNGEON</span>
+        <h3>던전과 코어</h3>
+        <p>던전 깊은 곳에는 응축된 마력체인 ‘코어’가 존재한다. 코어를 파괴해야 게이트가 소멸하며, 파괴 실패 시 내부 공간이 폭발적으로 분출된다.</p>
+      </div>
+      <div class="dual-card">
+        <span class="badge">HUNTER MANA</span>
+        <h3>헌터의 마력</h3>
+        <p>마력은 이능력이자 생명력이다. 과도한 사용 후에도 간단한 휴식이나 식사만으로 회복되지만, 완전히 고갈되면 생명 자체가 위험해진다.</p>
+      </div>
+    </div>
+    <div class="flow-box">
+      <div><b>01. 붕괴</b>내부 공간이 현실로 폭발적으로 분출된다.</div>
+      <div><b>02. 테라포밍</b>분출된 공간이 몬스터의 마력으로 현실을 덮는다.</div>
+      <div><b>03. 방어선 실패</b>2012년의 서울이 그 경고였다.</div>
+    </div>
+  </section>
+
+  <!-- 03. 게이트 등급별 난이도 -->
+  <section id="gate-difficulty">
+    <div class="sec-head">
+      <span class="num">03 / GATE DIFFICULTY</span>
+      <h2>게이트 등급별 난이도</h2>
+      <p>출현 몬스터와 코어 파괴 조건, 그리고 붕괴 시 발생하는 현실 침식 피해의 규모 기준.</p>
+    </div>
+    <div class="gate-grid">
+      <div class="gate-card">
+        <div class="g-header">
+          <span class="g-rank">F급 게이트</span>
+          <span class="g-dmg">피해: 소형 피해</span>
+        </div>
+        <ul>
+          <li><strong>권장 파티:</strong> 신규 각성자 단독/소수</li>
+          <li><strong>주요 개체:</strong> 슬라임, 고블린 (10마리 이하)</li>
+          <li><strong>공략 특징:</strong> 일반 도검으로 대응 가능</li>
+          <li><strong>코어 파괴:</strong> 일반 망치 타격으로 파괴</li>
+        </ul>
+      </div>
+
+      <div class="gate-card">
+        <div class="g-header">
+          <span class="g-rank">E급 게이트</span>
+          <span class="g-dmg">피해: 반경 50m 변이</span>
+        </div>
+        <ul>
+          <li><strong>권장 파티:</strong> E급 헌터 2~3인 권장</li>
+          <li><strong>주요 개체:</strong> 오크, 늑대 집단 (20~30마리 이하)</li>
+          <li><strong>공략 특징:</strong> 일반 무기 파손 주의</li>
+          <li><strong>코어 파괴:</strong> 지속적인 물리 타격 필요</li>
+        </ul>
+      </div>
+
+      <div class="gate-card">
+        <div class="g-header">
+          <span class="g-rank">D급 게이트</span>
+          <span class="g-dmg">피해: 건물 1개 동 파괴</span>
+        </div>
+        <ul>
+          <li><strong>권장 파티:</strong> D급 헌터 5인 필수</li>
+          <li><strong>주요 개체:</strong> 오크, 가고일 등</li>
+          <li><strong>공략 특징:</strong> 마력 무기 타격 필수</li>
+          <li><strong>코어 파괴:</strong> 마력 깃든 무기 집중 공격</li>
+        </ul>
+      </div>
+
+      <div class="gate-card">
+        <div class="g-header">
+          <span class="g-rank">C급 게이트</span>
+          <span class="g-dmg">피해: 동 단위 테라포밍</span>
+        </div>
+        <ul>
+          <li><strong>권장 파티:</strong> C급 이상 전용 입장</li>
+          <li><strong>주요 개체:</strong> 오거, 드레이크 등</li>
+          <li><strong>공략 특징:</strong> 지휘관급 몬스터 배치</li>
+          <li><strong>코어 파괴:</strong> 지휘관 처치 후 코어 노출</li>
+        </ul>
+      </div>
+
+      <div class="gate-card">
+        <div class="g-header">
+          <span class="g-rank">B급 게이트</span>
+          <span class="g-dmg">피해: 구 단위 기능 마비</span>
+        </div>
+        <ul>
+          <li><strong>권장 파티:</strong> B급 팀 또는 A급 동행</li>
+          <li><strong>주요 개체:</strong> 와이번, 섀도우 킹 등</li>
+          <li><strong>공략 특징:</strong> 전문 해체 장비 필수</li>
+          <li><strong>코어 파괴:</strong> 장비 이용한 결계 해제 후 파괴</li>
+        </ul>
+      </div>
+
+      <div class="gate-card">
+        <div class="g-header">
+          <span class="g-rank">A급 게이트</span>
+          <span class="g-dmg">피해: 광역시 단위 테라포밍</span>
+        </div>
+        <ul>
+          <li><strong>권장 파티:</strong> S급 1인 포함 대형 레이드</li>
+          <li><strong>주요 개체:</strong> 드래곤, 타이탄 등</li>
+          <li><strong>공략 특징:</strong> 게이트 자체 방어막 보유</li>
+          <li><strong>코어 파괴:</strong> 대형 화력 집중으로 방어막 돌파</li>
+        </ul>
+      </div>
+
+      <div class="gate-card s-rank" style="grid-column: 1 / -1;">
+        <div class="g-header">
+          <span class="g-rank">S급 게이트 (국가적 재앙)</span>
+          <span class="g-dmg" style="border-color:var(--sun);color:var(--sun);">피해: 국가 소멸 위기</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;">
+          <ul>
+            <li><strong>주요 개체:</strong> 고대 드래곤, 이계 군주</li>
+            <li><strong>특수 형태:</strong> 미니 블랙홀 형태의 균열</li>
+          </ul>
+          <ul>
+            <li><strong>코어 파괴:</strong> 측정 불능의 마력 집중 필요</li>
+            <li><strong>위험 요소:</strong> 게이트 소멸 시 대폭발 수반</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04. 헌터 등급 및 승급 기준 -->
+  <section id="rank">
+    <div class="sec-head">
+      <span class="num">04 / HUNTER RANK & PROMOTION</span>
+      <h2>등급별 승급 기준</h2>
+      <p>구천문청 중앙심의위원회 및 본부에서 관리하는 승급 산정 포인트와 필수 실적 가이드.</p>
+    </div>
+    <div class="ladder-wrap" id="lad"></div>
+    <div id="gtxt"></div>
+  </section>
+
+  <!-- 05. 에고웨폰, 깨어난 무기 -->
+  <section id="e">
+    <div class="sec-head">
+      <span class="num">05 / THE AWAKENED WEAPONS</span>
+      <h2>에고웨폰, 깨어난 무기</h2>
+      <p>뛰어난 무기에는 본래 있었으나 잠들어 있는 자아가 있다. 깨어난 자아를 에고웨폰이라 부른다.</p>
+    </div>
+    <div class="dual-cards">
+      <div class="dual-card">
+        <span class="badge">HUMAN FORM</span>
+        <h3>인간형</h3>
+        <p>마력으로 인간형을 유지하며 평소엔 사람처럼 생활한다. 체력과 내구성은 일반 인간을 아득히 뛰어넘는다.</p>
+      </div>
+      <div class="dual-card">
+        <span class="badge">WEAPON FORM</span>
+        <h3>무기형</h3>
+        <p>필요할 때 무기로 변형된다. 무기 상태에서는 전투에 집중하며, 마음이 통하는 주인에게 사념파로 대화를 요청한다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06. 도시를 움직이는 세력 -->
+  <section id="guilds">
+    <div class="sec-head">
+      <span class="num">06 / THE FACTIONS</span>
+      <h2>도시를 움직이는 세력</h2>
+      <p>같은 거리, 서로 다른 질서. 각 세력 카드를 클릭하면 세부 정보 팝업이 나타납니다.</p>
+    </div>
+    <div class="faction-list">
+      
+      <div class="faction-card" style="--c:#63d6e8" onclick="openGuildModal(0)">
+        <div class="faction-num">I</div>
+        <div class="faction-body">
+          <div class="sub-tag">국가 정부 직속 </div>
+          <h3>구천문청<small>九天門廳</small></h3>
+          <p>강남 본청에서 헌터관리청 역할을 하며 전국의 헌터 등급 부여 및 게이트 통제를 총괄한다. 완벽한 행정주의와 서류 중심의 관리를 지향하며, B급 승급 실전 테스트를 직접 집행한다.</p>
+          <span class="faction-meta">강남 본청 · 헌터 등급 평가 및 위탁 관리 · 구천문청 검사관 실전 테스트</span>
+        </div>
+      </div>
+
+      <div class="faction-card" style="--c:#9aa6ff" onclick="openGuildModal(1)">
+        <div class="faction-num">II</div>
+        <div class="faction-body">
+          <div class="sub-tag">서양 기업형 초대형 길드 </div>
+          <h3>아틀라스 라인<small>ATLAS LINE</small></h3>
+          <p>화력·정보·자본에 특화된 물량전의 강자. 수치와 성과로 서열을 철저히 매기며 A급 이상 간부급 정예가 레이드를 주도한다.</p>
+          <span class="faction-meta">초대형 자본 · 성과주의 레이드 · F급 출입 제한</span>
+        </div>
+      </div>
+
+      <div class="faction-card" style="--c:#e0705a" onclick="openGuildModal(2)">
+        <div class="faction-num">III</div>
+        <div class="faction-body">
+          <div class="sub-tag">동양 장인 + 상단</div>
+          <h3>청연상단<small>青淵商團</small></h3>
+          <p>수리·강화·제작에 특화되어 있다. 헌터를 무기의 관리 상태로 평가하기에 정성이 있다면 F급이라도 귀빈으로 대접한다.</p>
+          <span class="faction-meta">무기 제작 및 정비 · 자아 학설 정설화 · 무기 우대주의</span>
+        </div>
+      </div>
+
+      <div class="faction-card" style="--c:#f2b630" onclick="openGuildModal(3)">
+        <div class="faction-num">IV</div>
+        <div class="faction-body">
+          <div class="sub-tag">주택가 반지하 소형 길드</div>
+          <h3>해바라기 하우스<small>SUNFLOWER HOUSE</small></h3>
+          <p>D급 생활형 헌터가 주력을 이루며, 잡일 수행과 하청에 특화되어 있다. 파티를 구하지 못하는 F급 헌터들을 따뜻하게 맞이한다.</p>
+          <span class="faction-meta">주택가 반지하 · D급 생활형 헌터 주력 · F/D급 하청 전문</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 07. 헌터의 일상 -->
+  <section id="life">
+    <div class="sec-head">
+      <span class="num">07 / HUNTER'S DAILY LIFE</span>
+      <h2>헌터의 일상</h2>
+      <p>의뢰 게시판에서 일감을 고르고, 이능력으로 가벼운 잡일부터 게이트 토벌까지 해낸다.</p>
+    </div>
+    <div class="district-grid">
+      <div class="district-card">
+        <span class="num">01</span>
+        <h3>의뢰 게시판</h3>
+        <p>고양이 찾기부터 던전 토벌까지. 등급과 소속 세력에 따라 접수할 수 있는 의뢰 목록이 달라진다.</p>
+        <div class="chip-group"><span>하청 잡일</span><span>게이트 토벌</span><span>실종 수색</span></div>
+      </div>
+      <div class="district-card">
+        <span class="num">02</span>
+        <h3>실적 매수 및 암거래</h3>
+        <p>F급의 늪을 벗어나기 위한 실적 매매 시장. 서류상 평가와 실제 실력 사이의 묶임 현상이 빈번하다.</p>
+        <div class="chip-group"><span>실적 매수</span><span>서류 조작 방지</span><span>실전 면접</span></div>
+      </div>
+      <div class="district-card">
+        <span class="num">03</span>
+        <h3>무기 돌봄 및 정비</h3>
+        <p>무기 수리, 목욕, 식사. 일상의 소소한 정성과 돌봄이 깨어난 무기 에고웨폰과의 깊은 유대감이 된다.</p>
+        <div class="chip-group"><span>날 갈기</span><span>마력 주입</span><span>동반 식사</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08. 등장 도감 -->
+  <section id="roster">
+    <div class="sec-head">
+      <span class="num">08 / THE ARCHIVE ROSTER</span>
+      <h2>등장 인물도감</h2>
+      <p>카드를 선택하면 인물별 상세 정보와 특징적인 대사를 확인할 수 있습니다.</p>
+    </div>
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <div class="roster" id="roster-grid"></div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <q>F급 헌터의 이름은 기억되지 않는다.<br>하지만 무기는 이름을 부른다.</q>
+    <p>GATE ARCHIVE · 헌터와 에고웨폰 세계관</p>
+    <a href="#top" style="color:var(--core)">▲ 맨 위로</a>
+  </div>
+</footer>
+
+<!-- 모달 팝업 Structure -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <!-- 상단 가로형 꽉찬 이미지 -->
+    <img id="modal-img" class="modal-header-img" src="" alt="Header Image" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-tag" id="modal-tag">CATEGORY</div>
+      <h3 class="modal-title" id="modal-title">Title</h3>
+      <div class="modal-desc" id="modal-desc">Description text...</div>
+      <div class="modal-quote" id="modal-quote" style="display:none;"></div>
+      <!-- 인물도감 바로가기 -->
+      <div class="modal-action" id="modal-action" style="display:none;">
+        <button class="btn-roster-link" id="btn-roster-go" aria-label="인물도감 바로가기"><span>인물도감 바로가기</span>↘</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// 타이핑 효과
+(function typingEffect() {
+  var titleText = "게이트가 열린 서울,\n잠든 무기가 깨어났다";
+  var container = document.getElementById("typing-title");
+  var index = 0;
+
+  function type() {
+    if (index < titleText.length) {
+      var char = titleText.charAt(index);
+      if (char === "\n") {
+        container.appendChild(document.createElement("br"));
+      } else {
+        container.appendChild(document.createTextNode(char));
+      }
+      index++;
+      setTimeout(type, 70);
+    }
+  }
+  type();
+})();
+
+// 스크롤 리빌
+document.documentElement.classList.add('js');
+[].forEach.call(document.querySelectorAll('.tl li, .dual-card, .flow-box div, .faction-card, .district-card, .gate-card, .sec-head'), function(e, i){
+  e.classList.add('rv');
+  e.style.setProperty('--d', ((i % 4) * 0.08) + 's');
+});
+
+if('IntersectionObserver' in window){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(x){
+      if(x.isIntersecting){
+        x.target.classList.add('on');
+        io.unobserve(x.target);
+      }
+    });
+  }, {threshold: 0.12});
+  [].forEach.call(document.querySelectorAll('.rv'), function(e){ io.observe(e); });
+} else {
+  [].forEach.call(document.querySelectorAll('.rv'), function(e){ e.classList.add('on'); });
+}
+
+// 헌터 등급 스크립트
+(function(){
+var G=[
+  ["S","측정 불능","구천문청 중앙심의위원회 승인 必 | 국가적 재앙급 게이트 토벌 실적 必 | 점수 산정 불가 최상위 존재."],
+  ["A","91pt 이상","B급 이상 코어 3개 이상 보유 必 | 대형 길드 간부급 | 압도적 화력 및 실적 증명 필수."],
+  ["B","76~90pt","구천문청 검사관 실전 테스트 必 (서류 조작 방지) | 베테랑 헌터 | 게이트 핵심 전력."],
+  ["C","56~75pt","C급 이상 전용 게이트 입장 가능 | 중형 길드 주력 | 본격적인 실전 영역 진입."],
+  ["D","36~55pt","생활형 헌터 다수 상주 | 해바라기 하우스 주력 | 일상 밀착형 및 하청 의뢰 수행."],
+  ["E","16~35pt","공명 파트너 획득 시 실질 화력 C급 이상 상승 | 실적 부족으로 인한 '등급 묶임 현상' 다수 발생."],
+  ["F","0~15pt","신규 각성자 | 존재감 부재 및 파티 모집 불가 | 등급 상승을 위한 잡일 대량 수행 및 실적 매수 필수."]
+];
+var l=document.getElementById('lad'),x=document.getElementById('gtxt');
+G.forEach(function(g,i){
+  var e=document.createElement('button');
+  e.textContent=g[0];
+  e.setAttribute('aria-pressed',i==6);
+  if(g[0]=='S')e.className='s';
+  if(g[0]=='F')e.className='f';
+  e.onclick=function(){
+    [].forEach.call(l.children,function(c){c.setAttribute('aria-pressed',c===e)});
+    x.innerHTML='<h4>' + g[0] + '급 <span class="pts">' + g[1] + '</span></h4><ul>' + g[2].split('|').map(function(t){return '<li>' + t.trim() + '</li>';}).join('') + '</ul>';
+    x.className=g[0]=='S'?'s':(g[0]=='F'?'f':'');
+  };
+  l.appendChild(e);
+});
+l.lastChild.click();
+})();
+
+// 스크롤 프로그레스
+var pr=document.getElementById('prog');
+addEventListener('scroll',function(){
+  var h=document.documentElement;
+  pr.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+},{passive:true});
+
+// 세력 / 길드 데이터
+var GuildData = [
+  {
+    tag: 'I / 국가 정부 직속',
+    name: '구천문청 (九天門廳)',
+    groupKey: 'guchun',
+    img: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200"><rect width="600" height="200" fill="%23121d2b"/><path d="M0,100 L600,100 M300,0 L300,200" stroke="%2363d6e8" stroke-width="1" opacity="0.15"/><circle cx="300" cy="100" r="60" stroke="%2363d6e8" stroke-width="1.5" fill="none" opacity="0.3"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2363d6e8" font-family="sans-serif" font-size="20" letter-spacing="6" opacity="0.8">九天門廳 · GUCHUN</text></svg>',
+    desc: '강남 본청에 위치한 대한민국 헌터 관리 기구. 전국의 헌터 등급 부여 및 월간 실적 갱신, 게이트 수색 및 통제를 총괄한다. B급 승급 시 서류 조작을 방지하기 위한 검사관 실전 테스트를 직접 주관한다.'
+  },
+  {
+    tag: 'II / 서양 기업형 초대형 길드',
+    name: 'ATLAS LINE (아틀라스 라인)',
+    groupKey: 'atlas',
+    img: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200"><rect width="600" height="200" fill="%23131728"/><path d="M0,0 L600,200 M0,200 L600,0" stroke="%239aa6ff" stroke-width="1" opacity="0.15"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%239aa6ff" font-family="sans-serif" font-size="20" letter-spacing="6" opacity="0.8">ATLAS LINE</text></svg>',
+    desc: '막강한 자본과 화력을 바탕으로 하는 글로벌 대형 길드. 고등급 헌터와 최첨단 무장, 레이드 정보를 독점하고 있다. 엄격한 성과주의로 A급 이상 간부들이 주요 보직을 맡으며, F급 헌터는 출입조차 금지된다.'
+  },
+  {
+    tag: 'III / 동양 장인 + 상단',
+    name: '청연상단 (青淵商團)',
+    groupKey: 'cheongyeon',
+    img: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200"><rect width="600" height="200" fill="%23221516"/><circle cx="300" cy="100" r="70" stroke="%23e0705a" stroke-width="2" fill="none" opacity="0.25"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23e0705a" font-family="sans-serif" font-size="20" letter-spacing="6" opacity="0.8">青淵商團 · CHEONGYEON</text></svg>',
+    desc: '전통 무기 제작과 마력 수리, 강화를 전문으로 하는 장인 집단. 헌터 본인의 등급보다 헌터가 다루는 무기의 가치와 관리 상태를 우대하기에 F급 헌터라도 정성이 있다면 귀빈으로 대접한다.'
+  },
+  {
+    tag: 'IV / 주택가 반지하 소형 길드',
+    name: '해바라기 하우스',
+    groupKey: 'sunflower',
+    img: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200"><rect width="600" height="200" fill="%23241c10"/><circle cx="300" cy="100" r="50" fill="%23f2b630" opacity="0.15"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23f2b630" font-family="sans-serif" font-size="20" letter-spacing="4" opacity="0.85">해바라기 하우스</text></svg>',
+    desc: '주택가 반지하에 조용히 위치한 소규모 길드. D급 생활형 헌터들이 주축을 이루며, 저등급(F~D급) 헌터들의 안식처이자 생활 밀착형 의뢰/하청 전문 길드. 파티를 구하지 못하는 F급들을 따뜻하게 맞이한다.'
+  }
+];
+
+// 캐릭터 데이터 (code: 캐릭터 코드 / innerValue: 바깥 프로필 카드 번호 1~13)
+var C = [
+  // 에고웨폰 무기
+  {
+    id: 'E-01',
+    code: 'U',
+    innerValue: '6', // 유키사=6
+    name: '유키사 (雪彩)',
+    group: 'e',
+    type: '에고웨폰 · 흰백색 태도',
+    role: '거만함과 명검의 자부심을 품은 태도',
+    mbti: 'ESTJ · 3w4',
+    partner: '공명자 미정',
+    quote: '이런 둔한 손길로 날 다루려 들지 마라.',
+    desc: '• 원형: 흰백색 태도\n• 인간형: 긴 백발, 파란색 꽃 머리장식, 어두운 파란 눈, 흰색 기모노, 파란 오비, 미형 외모\n• 성격: ESTJ · 3w4 (거만 + 명검으로서의 강한 자부심)\n• 말투: 반말, 하대, 날카로운 톤 끝의 떨림'
+  },
+  {
+    id: 'E-02',
+    code: 'N',
+    innerValue: '7', // 나비=7
+    name: '나비',
+    group: 'e',
+    type: '에고웨폰 · 데저트이글 2자루',
+    role: '주인님을 따르는 명랑한 쌍권총',
+    mbti: 'ESFP · 7w6',
+    partner: '공명자 미정',
+    quote: '주인님 주인님! 나비가 탕탕 쏴버릴까요?!',
+    desc: '• 원형: 데저트이글 2자루\n• 인간형: 주홍 단발 링 트윈, 녹안, 아이 같은 덩치, 작은 가슴, 고양이 귀 검은색 후드, 검은 반바지, 항상 웃음\n• 성격: ESFP · 7w6 (명랑함, 주인님 호칭)\n• 말투: 반말 + 하이톤 (흥분하면 말이 빨라짐)'
+  },
+  {
+    id: 'E-03',
+    code: 'M',
+    innerValue: '4', // 묵연=4
+    name: '묵연',
+    group: 'e',
+    type: '에고웨폰 · 칠흑 데스사이드',
+    role: '칠흑의 사냥을 수행하는 과묵한 대낫',
+    mbti: 'INFJ · 9w8',
+    partner: '공명자 미정',
+    quote: '명령을 내리십시오. 소멸시키겠습니다.',
+    desc: '• 원형: 칠흑 데스사이드\n• 인간형: 긴 어두운 녹발, 흑안, D컵, 라텍스 가죽 수트, 무표정\n• 성격: INFJ · 9w8 (과묵함, 침착함)\n• 말투: 존댓말, 짧음, 나긋함, 다나까체'
+  },
+  {
+    id: 'E-04',
+    code: 'T',
+    innerValue: '13', // 태현=13
+    name: '태현',
+    group: 'e',
+    type: '에고웨폰 · 티타늄 방패',
+    role: '선우현의 탄탄한 티타늄 방패',
+    mbti: 'ESTP · 7w8',
+    partner: '선우현 (구천문청 S급)',
+    quote: '어이, 선우 형님. 내 뒤에 바짝 붙어있으라고.',
+    desc: '• 원형: 티타늄 방패\n• 공명자: 선우현\n• 인간형: 대충 쓸어넘긴 짧은 흑청발, 적안, 검정 선글라스, 거대 근육\n• 성격: ESTP · 7w8 (능구렁이 같은 유쾌함 + 느슨함)\n• 말투: 반말 + 능글맞음'
+  },
+  {
+    id: 'E-05',
+    code: 'H',
+    innerValue: '1', // 헤이즐=1
+    name: '헤이즐',
+    group: 'e',
+    type: '에고웨폰 · 컴파운드 보우',
+    role: '한채린의 정밀한 활',
+    mbti: 'ESFP · 9w8',
+    partner: '한채린 (구천문청 S급)',
+    quote: '채린 언니! 오늘 표적도 깔끔하게 꿰뚫어 볼까?',
+    desc: '• 원형: 컴파운드 보우\n• 공명자: 한채린\n• 인간형: 짙은 갈색 머리, 양갈래, 올리브그린 눈, 부드러운 인상\n• 성격: ESFP · 9w8 (발랄함, 수다스러움)\n• 말투: 반말 + 차분한 톤'
+  },
+  {
+    id: 'E-06',
+    code: 'J',
+    innerValue: '3', // 잭=3
+    name: '잭',
+    group: 'e',
+    type: '에고웨폰 · 대검',
+    role: '오세은의 대담한 대검',
+    mbti: 'ESTP · 7w8',
+    partner: '오세은 (ATLAS LINE S급)',
+    quote: '왜 그렇게 뻣뻣하게 굴어, 세은아? 나만 믿으라니까.',
+    desc: '• 원형: 대검\n• 공명자: 오세은\n• 인간형: 짧은 흑발, 호박색 눈, 그을린 피부, 크고 탄탄한 체구\n• 성격: ESTP · 7w8 (능글 + 대담 + 자신감 과잉)\n• 말투: 반말 + 능글맞은 농담 + 긁는 말'
+  },
+
+  // 구천문청
+  {
+    id: 'H-01',
+    code: 'S',
+    innerValue: '8', // 선우현=8
+    name: '선우현',
+    group: 'guchun',
+    type: '구천문청 · S급 헌터',
+    role: '완벽주의적인 원칙주의 관료',
+    mbti: 'ISTJ · 1w9',
+    partner: '태현 (티타늄 방패)',
+    quote: '규정과 절차를 준수하십시오. 타협은 없습니다.',
+    desc: '• 나이/성별: 35세 / 남성\n• 랭크: S급 (구천문청, ∀ 정장)\n• 외형: 짧은 흑발, 적안\n• 성격: ISTJ · 1w9 (고지식함, 칼같은 완벽주의)\n• 말투: 딱딱한 존댓말 + 다나까체 + 타협 없는 어조'
+  },
+  {
+    id: 'H-02',
+    code: 'R',
+    innerValue: '12', // 한채린=12
+    name: '한채린',
+    group: 'guchun',
+    type: '구천문청 · S급 헌터',
+    role: '철저하게 계산된 오만한 지략가',
+    mbti: 'ENTJ · 3w2',
+    partner: '헤이즐 (컴파운드 보우)',
+    quote: '내 계산을 벗어난 변수는 존재하지 않습니다.',
+    desc: '• 나이/성별: 30세 / 여성\n• 랭크: S급 (구천문청, ∀ 정장)\n• 외형: 허리까지 내려오는 흑발 하이포니테일, 보라색 눈, 고양이상 미녀\n• 성격: ENTJ · 3w2 (오만함, 철저한 성과 중심)\n• 말투: 존댓말 + 느긋하고 도발적인 어조 + 다나까체'
+  },
+
+  // 해바라기 하우스
+  {
+    id: 'H-04',
+    code: 'B',
+    innerValue: '9', // 박백수=9
+    name: '박백수',
+    group: 'sunflower',
+    type: '해바라기 하우스 · S급 헌터',
+    role: '반지하 길드의 느긋한 아저씨 길드장',
+    mbti: 'ENTP · 9w8',
+    partner: '-',
+    quote: '에이~ 뭘 그렇게 팍팍하게 굴어? 밥이나 먹고 해~',
+    desc: '• 나이/성별: 46세 / 남성\n• 랭크: S급 (해바라기 하우스 길드장)\n• 외형: 늘어져 보이는 트레이닝복 상하의, 덥수룩한 까치집 머리, 더러운 삼선 슬리퍼\n• 성격: ENTP · 9w8 (느긋함, 여유로움)\n• 말투: 반말 + 아재 특유의 친근·느릿·능글맞은 어조'
+  },
+  {
+    id: 'H-05',
+    code: 'HN',
+    innerValue: '10', // 윤희연=10
+    name: '윤희연',
+    group: 'sunflower',
+    type: '해바라기 하우스 · D급 헌터',
+    role: '반지하를 지키는 순둥한 힐러',
+    mbti: 'ISFJ · 9w1',
+    partner: '-',
+    quote: '저기... 오늘 청소는 제가 도와드릴까요...?',
+    desc: '• 나이/성별: 21세 / 여성\n• 랭크: D급 (해바라기 하우스)\n• 외형: 어깨 위 검은 단발 + 옆머리 귀여운 핀, 하늘색 눈, 순한 눈매, 후드티에 헤드폰\n• 성격: ISFJ · 9w1 (순둥함, 배려심)\n• 말투: 일상형 존댓말 + 부드러운 단어 + 해요체'
+  },
+
+  // ATLAS LINE
+  {
+    id: 'H-06',
+    code: 'E',
+    innerValue: '11', // 오세은=11
+    name: '오세은',
+    group: 'atlas',
+    type: 'ATLAS LINE · S급 헌터',
+    role: '자존심 높은 강아지상 정예 헌터',
+    mbti: 'INTJ · 3w4',
+    partner: '잭 (대검)',
+    quote: '실력 없는 말에 쓸데없이 얹을 시간 없어.',
+    desc: '• 나이/성별: 26세 / 여성\n• 랭크: S급 (ATLAS LINE, ∀ 검은 제복)\n• 외형: 밀색 머리, 푸른 눈, 강아지상\n• 성격: INTJ · 3w4 (자존심 강함, 말수 적음)\n• 말투: 반말 + 낮고 차분함'
+  },
+
+  // 청연상단
+  {
+    id: 'H-08',
+    code: 'JH',
+    innerValue: '2', // 유지한=2
+    name: '유지한',
+    group: 'cheongyeon',
+    type: '청연상단 (青淵商團) · S급 장인',
+    role: '무기와 마력을 다루는 다정한 정갈한 미남',
+    mbti: 'ENTP · 9w8',
+    partner: '-',
+    quote: '좋은 날이 서려면 정성이 필요한 법이지.',
+    desc: '• 나이/성별: 38세 / 남성\n• 랭크: S급 장인 (청연상단)\n• 외형: 흑발 포니테일, 보라색 눈, 정갈한 미남, 흰색 한복 + 가죽 앞치마\n• 성격: ENTP · 9w8 (차분함, 다정함, 능청스러움)\n• 말투: 반말 + 능청스러운 농담 + 잔잔함'
+  },
+
+  // 미소속
+  {
+    id: 'H-10',
+    code: 'C',
+    innerValue: '5', // 첸=5
+    name: '첸',
+    group: 'unaffiliated',
+    type: '미소속 · S급 헌터',
+    role: '창파오를 입은 실눈의 미스터리 한량',
+    mbti: 'ENTP · 9w8',
+    partner: '-',
+    quote: '재미있는 소문이 들리던데~ 나도 끼워주려나?',
+    desc: '• 나이/성별: 나이 미상 / 남성\n• 랭크: S급 (미소속)\n• 외형: 길게 땋은 보라색 머리, 눈꼬리가 올라간 실눈, 슬림한 체격, 블랙 창파오 + 블랙 코트, 항상 웃는 인상\n• 성격: ENTP · 9w8 (한량, 친절함, 비밀주의)\n• 말투: 쾌활한 반말'
+  }
+];
+
+var T = [
+  ['all','전체'],
+  ['e','에고웨폰'],
+  ['guchun','구천문청'],
+  ['sunflower','해바라기'],
+  ['atlas','ATLAS LINE'],
+  ['cheongyeon','청연상단'],
+  ['unaffiliated','미소속']
+];
+
+var tb = document.getElementById('tabs'), gr = document.getElementById('roster-grid');
+
+var GC = {e:'#63d6e8', guchun:'#63d6e8', atlas:'#9aa6ff', cheongyeon:'#e0705a', sunflower:'#f2b630', unaffiliated:'#b9c2d3'};
+
+// 바깥 카드리스트 이미지 URL (단독 번호 파일명)
+function getOuterCardImgUrl(value) {
+  return 'https://pub-fbbb27fc2fcf45038ba119bde80cba15.r2.dev/' + value + '.webp';
+}
+
+// 팝업 내부 이미지 URL (code / 1)
+function getModalImgUrl(code) {
+  return 'https://pub-fbbb27fc2fcf45038ba119bde80cba15.r2.dev/c/' + code + '/1.webp';
+}
+
+function draw(f){
+  gr.innerHTML = '';
+  C.filter(function(c){ return f == 'all' || c.group == f; }).forEach(function(c, i){
+    var d = document.createElement('div');
+    d.className = 'rc';
+    d.tabIndex = 0;
+    d.style.setProperty('--d', (i * 0.05) + 's');
+    
+    d.style.setProperty('--c', GC[c.group] || '#63d6e8');
+
+    // 카드리스트(바깥)는 전달해주신 단독 링크 형태로 출력 (1~13)
+    var outerImgUrl = getOuterCardImgUrl(c.innerValue);
+
+    d.innerHTML = '<div class="top"><span>' + c.id + '</span><i></i></div>' +
+      '<img class="pic" src="' + outerImgUrl + '" alt="' + c.name + '" loading="lazy">' +
+      '<div class="meta">' +
+        '<small>' + c.type + '</small>' +
+        '<h3>' + c.name + '</h3>' +
+        '<i class="rule"></i>' +
+        '<p>' + c.role + '</p>' +
+      '</div>';
+
+    d.onclick = function(){ openCharModal(c); };
+    gr.appendChild(d);
+  });
+}
+
+function selectTabByGroup(groupKey) {
+  var targetBtn = null;
+  [].forEach.call(tb.children, function(x, idx){
+    if(T[idx][0] === groupKey) {
+      targetBtn = x;
+    }
+  });
+  if(targetBtn) {
+    targetBtn.click();
+  }
+}
+
+T.forEach(function(t, i){
+  var b = document.createElement('button');
+  b.textContent = t[1];
+  b.setAttribute('role', 'tab');
+  b.setAttribute('aria-selected', i == 0);
+  b.onclick = function(){
+    [].forEach.call(tb.children, function(x){ x.setAttribute('aria-selected', x === b); });
+    draw(t[0]);
+  };
+  tb.appendChild(b);
+});
+draw('all');
+
+// 모달 제어
+var overlay = document.getElementById('modal-overlay');
+var mImg = document.getElementById('modal-img');
+var mTag = document.getElementById('modal-tag');
+var mTitle = document.getElementById('modal-title');
+var mDesc = document.getElementById('modal-desc');
+var mQuote = document.getElementById('modal-quote');
+var mAction = document.getElementById('modal-action');
+var btnRosterGo = document.getElementById('btn-roster-go');
+
+function openGuildModal(index) {
+  var data = GuildData[index];
+  
+  if(data.img) {
+    mImg.src = data.img;
+    mImg.style.display = 'block';
+  } else {
+    mImg.style.display = 'none';
+  }
+  
+  mTag.textContent = data.tag;
+  mTitle.textContent = data.name;
+  mDesc.textContent = data.desc;
+  mQuote.style.display = 'none';
+  
+  mAction.style.display = 'flex';
+  btnRosterGo.onclick = function() {
+    closeModal();
+    selectTabByGroup(data.groupKey);
+    var rosterSec = document.getElementById('roster');
+    if(rosterSec) rosterSec.scrollIntoView({ behavior: 'smooth' });
+  };
+  
+  overlay.classList.add('active');
+}
+
+function openCharModal(data) {
+  // 모달 팝업(카드 안) 상단 이미지는 code + 1 고정
+  var modalImgUrl = getModalImgUrl(data.code);
+  mImg.src = modalImgUrl;
+  mImg.style.display = 'block';
+
+  mTag.textContent = data.id + ' · ' + data.type + (data.mbti ? ' [' + data.mbti + ']' : '');
+  mTitle.textContent = data.name;
+  mDesc.textContent = data.desc;
+  
+  if(data.quote) {
+    mQuote.textContent = '“' + data.quote + '”';
+    mQuote.style.display = 'block';
+  } else {
+    mQuote.style.display = 'none';
+  }
+  
+  mAction.style.display = 'none';
+  overlay.classList.add('active');
+}
+
+function closeModal(e) {
+  if(!e || e.target === overlay || e.target.classList.contains('modal-close')) {
+    overlay.classList.remove('active');
+  }
+}
+
+window.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+</body>
+</html>
