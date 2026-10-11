@@ -202,8 +202,8 @@ section#roster{border-top:none}
   background-repeat:no-repeat}
 .rc:hover::before,.rc:focus-visible::before{opacity:.9}
 .rc::after{content:"";position:absolute;left:0;top:34%;width:2px;height:18%;background:var(--c);opacity:.7;z-index:3}
-.rc .top{text-shadow:0 1px 6px rgba(0,0,0,.8);position:absolute;left:16px;right:16px;top:16px;display:flex;align-items:center;gap:10px;font:500 11px var(--sans);letter-spacing:.14em;color:var(--mute);z-index:2}
-.rc .top i{flex:1;height:1px;background:linear-gradient(90deg,var(--line-light),transparent)}
+.rc .top{text-shadow:0 1px 6px rgba(0,0,0,.8);position:absolute;left:16px;right:16px;top:16px;display:flex;align-items:center;gap:10px;font:500 11px var(--sans);letter-spacing:.14em;color:#ffffff;z-index:2}
+.rc .top i{flex:1;height:1px;background:linear-gradient(90deg,#ffffff,transparent)}
 .rc .pic{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
 .rc .meta{position:absolute;left:0;right:0;bottom:0;padding:34px 18px 18px;background:linear-gradient(transparent,rgba(11,14,20,.95) 40%)}
 .rc small{font-size:11px;color:var(--c);display:block;margin-bottom:4px;letter-spacing:.02em}
@@ -213,25 +213,90 @@ section#roster{border-top:none}
 .rc p{margin:0;font-size:13px;color:var(--mute)}
 
 /* 모달 팝업 */
-.modal-overlay{position:fixed;inset:0;background:rgba(7,9,14,.88);backdrop-filter:blur(8px);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s ease}
-.modal-overlay.active{opacity:1;pointer-events:auto}
-.modal-box{background:var(--bg2);border:1px solid var(--line-light);max-width:580px;width:100%;position:relative;box-shadow:0 24px 48px rgba(0,0,0,.7);transform:translateY(20px);transition:transform .3s ease;max-height:85vh;overflow-y:auto;overflow-x:hidden}
-.modal-overlay.active .modal-box{transform:translateY(0)}
+.modal-overlay{position:fixed;inset:0;background:radial-gradient(circle at 50% 30%,rgba(18,26,40,.82),rgba(5,7,11,.94));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .3s ease,visibility 0s linear .3s}
+.modal-overlay.active{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .3s ease,visibility 0s}
+body.modal-open{overflow:hidden}
 
-/* 팝업 상단 가로형 Banner 이미지 영역 */
-.modal-header-img{width:100%;height:240px;object-fit:cover;display:block;border-bottom:1px solid var(--line)}
+.modal-box{--c:var(--core);
+  position:relative;width:100%;max-width:640px;max-height:88vh;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;
+  background:linear-gradient(180deg,var(--bg3) 0,var(--bg2) 260px,var(--bg2) 100%);
+  border:1px solid var(--line-light);border-top:2px solid var(--c);border-radius:4px;
+  box-shadow:0 30px 70px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.02) inset,0 0 60px -20px var(--c);
+  transform:translateY(24px) scale(.97);opacity:0;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .3s ease;
+  scrollbar-width:thin;scrollbar-color:var(--line-light) transparent}
+.modal-overlay.active .modal-box{transform:none;opacity:1}
+.modal-box::-webkit-scrollbar{width:6px}
+.modal-box::-webkit-scrollbar-thumb{background:var(--line-light);border-radius:3px}
 
-.modal-content{padding:28px 32px 36px}
-.modal-close{position:absolute;top:14px;right:14px;background:rgba(11,14,20,.6);border:1px solid var(--line-light);color:var(--ink);font-size:22px;cursor:pointer;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;line-height:1;z-index:10;transition:all .2s}
-.modal-close:hover{color:var(--core);border-color:var(--core);background:rgba(11,14,20,.9)}
-.modal-tag{font-size:12px;color:var(--core);margin-bottom:8px;letter-spacing:.1em;font-weight:700}
-.modal-title{font:900 28px/1.2 var(--serif);margin:0 0 16px;color:var(--ink)}
-.modal-desc{color:#b4becd;font-size:15px;line-height:1.75;margin-bottom:20px;white-space:pre-line}
-.modal-quote{border-left:3px solid var(--core);padding:12px 18px;background:rgba(99,214,232,.04);font:500 15px/1.6 var(--serif);color:var(--ink);margin-bottom:20px}
-.modal-action{margin-top:24px;border-top:0px solid var(--line);padding-top:12px;display:flex;justify-content:flex-end}
-.btn-roster-link{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:0;background:none;border:0;color:var(--core);font-size:14px;line-height:1;cursor:pointer;transition:transform .2s,color .2s}
-.btn-roster-link span{font-size:14px}
-.btn-roster-link:hover{background:none;color:var(--ink);transform:translate(2px,2px)}
+/* 상단 히어로 (이미지 + 이름) */
+.modal-hero{position:relative;height:280px;overflow:hidden;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--c) 22%,var(--bg3)),var(--bg2));border-bottom:1px solid var(--line)}
+.modal-hero::before{content:"";position:absolute;inset:0;opacity:.5;
+  background:repeating-linear-gradient(0deg,transparent 0 31px,rgba(255,255,255,.035) 31px 32px)}
+.modal-header-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;border:0;
+  animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both}
+@keyframes heroIn{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:none}}
+.modal-hero-fade{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(11,14,20,.35) 0,transparent 30%,rgba(18,23,34,.55) 62%,var(--bg2) 100%)}
+/* 모서리 괄호선 */
+.modal-hero::after{content:"";position:absolute;inset:12px;pointer-events:none;opacity:.55;--k:18px;
+  background:
+   linear-gradient(var(--c),var(--c)) top left/var(--k) 1px,
+   linear-gradient(var(--c),var(--c)) top left/1px var(--k),
+   linear-gradient(var(--c),var(--c)) top right/var(--k) 1px,
+   linear-gradient(var(--c),var(--c)) top right/1px var(--k),
+   linear-gradient(var(--c),var(--c)) bottom left/var(--k) 1px,
+   linear-gradient(var(--c),var(--c)) bottom left/1px var(--k),
+   linear-gradient(var(--c),var(--c)) bottom right/var(--k) 1px,
+   linear-gradient(var(--c),var(--c)) bottom right/1px var(--k);
+  background-repeat:no-repeat}
+.modal-hero-text{position:absolute;left:0;right:0;bottom:0;padding:0 32px 18px;z-index:2}
+.modal-tag{display:inline-flex;align-items:center;gap:8px;font:700 11px/1 var(--sans);color:#fff;letter-spacing:.18em;margin-bottom:10px;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.modal-tag::before{content:"";width:18px;height:1px;background:#fff}
+.modal-title{font:900 32px/1.15 var(--serif);margin:0;color:#fff;letter-spacing:-.01em;text-shadow:0 2px 16px rgba(0,0,0,.7)}
+
+.modal-close{position:absolute;top:14px;right:14px;z-index:10;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(11,14,20,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.18);color:var(--ink);font-size:20px;line-height:1;cursor:pointer;padding:0;transition:all .2s}
+.modal-close:hover{color:#fff;border-color:var(--c);background:color-mix(in srgb,var(--c) 28%,rgba(11,14,20,.8));transform:rotate(90deg)}
+.modal-close:focus-visible{outline-color:var(--c);outline-offset:2px}
+.modal-box > .modal-close{position:sticky;float:right;margin:14px 14px -50px 0}
+
+.modal-content{padding:20px 32px 32px}
+.modal-box.is-guild .modal-content{padding-top:22px}
+
+/* 칩(태그) */
+.modal-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.modal-chips:empty{display:none}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;font:500 12px/1.2 var(--sans);letter-spacing:.02em;color:var(--ink);
+  background:rgba(255,255,255,.035);border:1px solid var(--line-light);border-radius:999px}
+.chip i{font-style:normal;font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--mute)}
+.chip.accent{color:var(--c);border-color:color-mix(in srgb,var(--c) 45%,transparent);background:color-mix(in srgb,var(--c) 10%,transparent)}
+.chip.accent i{color:inherit;opacity:.7}
+
+/* 섹션 라벨 */
+.modal-label{display:flex;align-items:center;gap:12px;margin:0 0 6px;font:700 11px/1 var(--sans);letter-spacing:.2em;color:var(--mute)}
+.modal-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line-light),transparent)}
+.modal-label b{color:var(--c);font-weight:700}
+
+/* 프로필 정보 */
+.modal-info{margin:0}
+.modal-info .row{display:grid;grid-template-columns:84px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);
+  opacity:0;animation:rowIn .45s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i,0) * 45ms + 120ms)}
+.modal-info .row:last-child{border-bottom:0}
+@keyframes rowIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.modal-info dt{margin:0;padding-top:2px;font:600 12px/1.6 var(--sans);color:var(--c);letter-spacing:.06em;white-space:nowrap}
+.modal-info dd{margin:0;font-size:14.5px;line-height:1.75;color:#c3ccda}
+
+.modal-desc{color:#b4becd;font-size:15px;line-height:1.8;white-space:pre-line}
+
+.modal-action{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:flex-end}
+.btn-roster-link{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;
+  background:color-mix(in srgb,var(--c) 10%,transparent);border:1px solid color-mix(in srgb,var(--c) 50%,transparent);border-radius:999px;
+  color:var(--c);font:600 13px/1 var(--sans);letter-spacing:.02em;cursor:pointer;transition:all .2s}
+.btn-roster-link span{font-size:13px}
+.btn-roster-link:hover{background:var(--c);color:var(--bg);transform:translateY(-1px)}
 
 footer{padding:60px 0;text-align:center;color:var(--mute);font-size:13px;border-top:1px solid var(--line)}
 footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:none;margin-bottom:20px}
@@ -242,8 +307,13 @@ footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:no
   .faction-num{display:none}
   section{padding:64px 0}
   .tl li{grid-template-columns:1fr;gap:0}
-  .modal-header-img{height:160px}
-  .modal-content{padding:20px 24px 28px}
+  .modal-overlay{padding:0;align-items:flex-end}
+  .modal-box{max-width:none;max-height:92vh;border-radius:16px 16px 0 0;border-left:0;border-right:0;border-bottom:0;transform:translateY(40px)}
+  .modal-hero{height:220px}
+  .modal-hero-text{padding:0 22px 14px}
+  .modal-title{font-size:26px}
+  .modal-content{padding:16px 22px calc(28px + env(safe-area-inset-bottom,0px))}
+  .modal-info .row{grid-template-columns:1fr;gap:2px;padding:12px 0}
   .gate-card .g-header{flex-direction:column;align-items:flex-start;gap:6px}
 }
 @media(prefers-reduced-motion:reduce){
@@ -444,8 +514,28 @@ footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:no
   <section id="rank">
     <div class="sec-head">
       <span class="num">04 / HUNTER RANK & PROMOTION</span>
-      <h2>등급별 승급 기준</h2>
-      <p>구천문청 중앙심의위원회 및 본부에서 관리하는 승급 산정 포인트와 필수 실적 가이드.</p>
+      <h2>헌터 승급·등급 관리 규정</h2>
+      <p>구천문청 중앙심의위원회 및 본부에서 관리하는 승급 규정 및 산정 기준.</p>
+    </div>
+    <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--line-light); padding: 24px; border-radius: 4px; margin-bottom: 24px; line-height: 1.8;">
+      <h3 style="margin-top:0; color:var(--core); font-size:18px;">심사 & 승급 규정</h3>
+      <ul style="margin:0 0 16px; padding-left:20px; color:#c0c6d4;">
+        <li>최대 1000pt = 실적(최대 900pt) + 전투력 실측(최대 100pt)</li>
+        <li>3개월마다 정기 갱신 → 본청 심사</li>
+      </ul>
+      <h3 style="color:var(--core); font-size:18px; margin-top:16px;">실적 산정</h3>
+      <ul style="margin:0 0 16px; padding-left:20px; color:#c0c6d4;">
+        <li>3개월 이내 공식 의뢰 게시판 완수건</li>
+        <li>게이트 토벌: F~E(30~100pt) | D~C(150~450pt) | B 이상(600pt~ | 기여도 분배)</li>
+        <li>이능력 잡일 지원: 건당 3~15pt</li>
+        <li>서류상 완수 증명(의뢰인 서명) 기준 점수 부여</li>
+        <li style="color:var(--mute); list-style:none; margin-left:-20px;">상위 길드의 F·D급 잡일 실적 대량 매수</li>
+        <li style="color:var(--mute); list-style:none; margin-left:-20px;">암시장을 통한 서류 구매 → 실적 세탁</li>
+      </ul>
+      <h3 style="color:var(--core); font-size:18px; margin-top:16px;">전투력 실측 (100pt)</h3>
+      <ul style="margin:0; padding-left:20px; color:#c0c6d4;">
+        <li>3개월마다 정기 검사 → 구천문청 측정실</li>
+      </ul>
     </div>
     <div class="ladder-wrap" id="lad"></div>
     <div id="gtxt"></div>
@@ -467,7 +557,7 @@ footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:no
       <div class="dual-card">
         <span class="badge">WEAPON FORM</span>
         <h3>무기형</h3>
-        <p>필요할 때 무기로 변형된다. 무기 상태에서는 전투에 집중하며, 마음이 통하는 주인에게 사념파로 대화를 요청한다.</p>
+        <p>필요할 때 무기로 변형된다. 무기 상태에서는 전투, 마음이 통하는 주인에게 사념파로 대화를 요청한다.</p>
       </div>
     </div>
   </section>
@@ -477,11 +567,11 @@ footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:no
     <div class="sec-head">
       <span class="num">06 / THE FACTIONS</span>
       <h2>도시를 움직이는 세력</h2>
-      <p>같은 거리, 서로 다른 질서. 각 세력 카드를 클릭하면 세부 정보 팝업이 나타납니다.</p>
+      <p>같은 거리, 서로 다른 질서. 각 세력 카드를 클릭하면 세부 정보 팝업이 나타난다.</p>
     </div>
     <div class="faction-list">
       
-      <div class="faction-card" style="--c:#63d6e8" onclick="openGuildModal(0)">
+      <div class="faction-card" style="--c:#9aa6ff" onclick="openGuildModal(0)">
         <div class="faction-num">I</div>
         <div class="faction-body">
           <div class="sub-tag">국가 정부 직속 </div>
@@ -506,7 +596,7 @@ footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:no
         <div class="faction-body">
           <div class="sub-tag">동양 장인 + 상단</div>
           <h3>청연상단<small>青淵商團</small></h3>
-          <p>수리·강화·제작에 특화되어 있다. 헌터를 무기의 관리 상태로 평가하기에 정성이 있다면 F급이라도 귀빈으로 대접한다.</p>
+          <p>수리·강화·제작에 특화되어 있다. 헌터를 무기의 관리 상태로 평가하기기에 정성이 있다면 F급이라도 귀빈으로 대접한다.</p>
           <span class="faction-meta">무기 제작 및 정비 · 자아 학설 정설화 · 무기 우대주의</span>
         </div>
       </div>
@@ -558,7 +648,6 @@ footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:no
     <div class="sec-head">
       <span class="num">08 / THE ARCHIVE ROSTER</span>
       <h2>등장 인물도감</h2>
-      <p>카드를 선택하면 인물별 상세 정보와 특징적인 대사를 확인할 수 있습니다.</p>
     </div>
     <div class="tabs" id="tabs" role="tablist"></div>
     <div class="roster" id="roster-grid"></div>
@@ -575,16 +664,21 @@ footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:no
 </footer>
 
 <!-- 모달 팝업 Structure -->
-<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
-  <div class="modal-box" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeModal()">&times;</button>
-    <!-- 상단 가로형 꽉찬 이미지 -->
-    <img id="modal-img" class="modal-header-img" src="" alt="Header Image" style="display:none;">
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-box" id="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" id="modal-close" aria-label="닫기" onclick="closeModal()">&times;</button>
+    <div class="modal-hero" id="modal-hero">
+      <img id="modal-img" class="modal-header-img" src="" alt="" style="display:none;">
+      <div class="modal-hero-fade"></div>
+      <div class="modal-hero-text">
+        <div class="modal-tag" id="modal-tag">CATEGORY</div>
+        <h3 class="modal-title" id="modal-title">Title</h3>
+      </div>
+    </div>
     <div class="modal-content">
-      <div class="modal-tag" id="modal-tag">CATEGORY</div>
-      <h3 class="modal-title" id="modal-title">Title</h3>
-      <div class="modal-desc" id="modal-desc">Description text...</div>
-      <div class="modal-quote" id="modal-quote" style="display:none;"></div>
+      <div class="modal-chips" id="modal-chips"></div>
+      <div class="modal-label" id="modal-label" style="display:none;"><b>PROFILE</b></div>
+      <div class="modal-desc" id="modal-desc" style="display:none;"></div>
       <!-- 인물도감 바로가기 -->
       <div class="modal-action" id="modal-action" style="display:none;">
         <button class="btn-roster-link" id="btn-roster-go" aria-label="인물도감 바로가기"><span>인물도감 바로가기</span>↘</button>
@@ -640,12 +734,12 @@ if('IntersectionObserver' in window){
 (function(){
 var G=[
   ["S","측정 불능","구천문청 중앙심의위원회 승인 必 | 국가적 재앙급 게이트 토벌 실적 必 | 점수 산정 불가 최상위 존재."],
-  ["A","91pt 이상","B급 이상 코어 3개 이상 보유 必 | 대형 길드 간부급 | 압도적 화력 및 실적 증명 필수."],
-  ["B","76~90pt","구천문청 검사관 실전 테스트 必 (서류 조작 방지) | 베테랑 헌터 | 게이트 핵심 전력."],
-  ["C","56~75pt","C급 이상 전용 게이트 입장 가능 | 중형 길드 주력 | 본격적인 실전 영역 진입."],
-  ["D","36~55pt","생활형 헌터 다수 상주 | 해바라기 하우스 주력 | 일상 밀착형 및 하청 의뢰 수행."],
-  ["E","16~35pt","공명 파트너 획득 시 실질 화력 C급 이상 상승 | 실적 부족으로 인한 '등급 묶임 현상' 다수 발생."],
-  ["F","0~15pt","신규 각성자 | 존재감 부재 및 파티 모집 불가 | 등급 상승을 위한 잡일 대량 수행 및 실적 매수 필수."]
+  ["A","910pt 이상","B급 이상 코어 3개 이상 보유 必 | 대형 길드 간부급 | 압도적 화력 및 실적 증명 필수."],
+  ["B","760~900pt","구천문청 검사관 실전 테스트 必 (서류 조작 방지) | 베테랑 헌터 | 게이트 핵심 전력."],
+  ["C","560~750pt","C급 이상 전용 게이트 입장 가능 | 중형 길드 주력 | 본격적인 실전 영역 진입."],
+  ["D","360~550pt","생활형 헌터 다수 상주 | 해바라기 하우스 주력 | 일상 밀착형 및 하청 의뢰 수행."],
+  ["E","160~350pt","공명 파트너 획득 시 실질 화력 C급 이상 상승 | 실적 부족으로 인한 '등급 묶임 현상' 다수 발생."],
+  ["F","0~150pt","신규 각성자 | 존재감 부재 및 파티 모집 불가 | 등급 상승을 위한 잡일 대량 수행 및 실적 매수 필수."]
 ];
 var l=document.getElementById('lad'),x=document.getElementById('gtxt');
 G.forEach(function(g,i){
@@ -677,29 +771,29 @@ var GuildData = [
     tag: 'I / 국가 정부 직속',
     name: '구천문청 (九天門廳)',
     groupKey: 'guchun',
-    img: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200"><rect width="600" height="200" fill="%23121d2b"/><path d="M0,100 L600,100 M300,0 L300,200" stroke="%2363d6e8" stroke-width="1" opacity="0.15"/><circle cx="300" cy="100" r="60" stroke="%2363d6e8" stroke-width="1.5" fill="none" opacity="0.3"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2363d6e8" font-family="sans-serif" font-size="20" letter-spacing="6" opacity="0.8">九天門廳 · GUCHUN</text></svg>',
-    desc: '강남 본청에 위치한 대한민국 헌터 관리 기구. 전국의 헌터 등급 부여 및 월간 실적 갱신, 게이트 수색 및 통제를 총괄한다. B급 승급 시 서류 조작을 방지하기 위한 검사관 실전 테스트를 직접 주관한다.'
+    img: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200"><rect width="600" height="200" fill="%23131728"/><path d="M0,100 L600,100 M300,0 L300,200" stroke="%239aa6ff" stroke-width="1" opacity="0.15"/><circle cx="300" cy="100" r="60" stroke="%239aa6ff" stroke-width="1.5" fill="none" opacity="0.3"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%239aa6ff" font-family="sans-serif" font-size="20" letter-spacing="6" opacity="0.8">九天門廳 · GUCHUN</text></svg>',
+    desc: '강남 본청에 위치한 대한민국 헌터 관리 기구이다. 전국의 헌터 등급 부여 및 월간 실적 갱신, 게이트 수색과 통제를 총괄하는 행정 기관이며, 완벽한 행정주의와 서류 중심의 관리 체계를 고수한다.'
   },
   {
     tag: 'II / 서양 기업형 초대형 길드',
     name: 'ATLAS LINE (아틀라스 라인)',
     groupKey: 'atlas',
     img: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200"><rect width="600" height="200" fill="%23131728"/><path d="M0,0 L600,200 M0,200 L600,0" stroke="%239aa6ff" stroke-width="1" opacity="0.15"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%239aa6ff" font-family="sans-serif" font-size="20" letter-spacing="6" opacity="0.8">ATLAS LINE</text></svg>',
-    desc: '막강한 자본과 화력을 바탕으로 하는 글로벌 대형 길드. 고등급 헌터와 최첨단 무장, 레이드 정보를 독점하고 있다. 엄격한 성과주의로 A급 이상 간부들이 주요 보직을 맡으며, F급 헌터는 출입조차 금지된다.'
+    desc: '막강한 자본과 화력을 바탕으로 하는 글로벌 대형 길드이다. 고등급 헌터와 최첨단 무장, 레이드 정보를 독점하고 있으며, 엄격한 성과주의를 바탕으로 철저한 서열 중심의 운영을 펼친다.'
   },
   {
     tag: 'III / 동양 장인 + 상단',
     name: '청연상단 (青淵商團)',
     groupKey: 'cheongyeon',
     img: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200"><rect width="600" height="200" fill="%23221516"/><circle cx="300" cy="100" r="70" stroke="%23e0705a" stroke-width="2" fill="none" opacity="0.25"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23e0705a" font-family="sans-serif" font-size="20" letter-spacing="6" opacity="0.8">青淵商團 · CHEONGYEON</text></svg>',
-    desc: '전통 무기 제작과 마력 수리, 강화를 전문으로 하는 장인 집단. 헌터 본인의 등급보다 헌터가 다루는 무기의 가치와 관리 상태를 우대하기에 F급 헌터라도 정성이 있다면 귀빈으로 대접한다.'
+    desc: '전통 무기 제작과 마력 수리, 강화를 전문으로 하는 장인 집단이다. 헌터의 등급보다 다루는 무기의 가치와 관리 상태를 우선시하며, 정성이 담긴 무기라면 F급 헌터의 의뢰라도 귀빈으로 대접한다.'
   },
   {
     tag: 'IV / 주택가 반지하 소형 길드',
     name: '해바라기 하우스',
     groupKey: 'sunflower',
     img: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200"><rect width="600" height="200" fill="%23241c10"/><circle cx="300" cy="100" r="50" fill="%23f2b630" opacity="0.15"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23f2b630" font-family="sans-serif" font-size="20" letter-spacing="4" opacity="0.85">해바라기 하우스</text></svg>',
-    desc: '주택가 반지하에 조용히 위치한 소규모 길드. D급 생활형 헌터들이 주축을 이루며, 저등급(F~D급) 헌터들의 안식처이자 생활 밀착형 의뢰/하청 전문 길드. 파티를 구하지 못하는 F급들을 따뜻하게 맞이한다.'
+    desc: '주택가 반지하에 조용히 자리 잡은 소규모 길드이다. D급 생활형 헌터들의 따뜻한 안식처이자, 일상 밀착형 의뢰와 하청을 전담하는 공간이다.'
   }
 ];
 
@@ -709,181 +803,175 @@ var C = [
   {
     id: 'E-01',
     code: 'U',
-    innerValue: '6', // 유키사=6
+    innerValue: '6',
     name: '유키사 (雪彩)',
     group: 'e',
     type: '에고웨폰 · 흰백색 태도',
     role: '거만함과 명검의 자부심을 품은 태도',
     mbti: 'ESTJ · 3w4',
-    partner: '공명자 미정',
-    quote: '이런 둔한 손길로 날 다루려 들지 마라.',
-    desc: '• 원형: 흰백색 태도\n• 인간형: 긴 백발, 파란색 꽃 머리장식, 어두운 파란 눈, 흰색 기모노, 파란 오비, 미형 외모\n• 성격: ESTJ · 3w4 (거만 + 명검으로서의 강한 자부심)\n• 말투: 반말, 하대, 날카로운 톤 끝의 떨림'
+    partner: 'USER',
+    summary: '흰백색 태도를 원형으로 하는 에고웨폰이다. 긴 백발과 파란색 꽃 머리장식, 어두운 파란 눈을 지녔으며 흰색 기모노와 파란 오비를 걸친 미형의 외모이다. 거만한 태도 속에서 명검으로서의 강한 자부심을 드러낸다.'
   },
   {
     id: 'E-02',
     code: 'N',
-    innerValue: '7', // 나비=7
+    innerValue: '7',
     name: '나비',
     group: 'e',
     type: '에고웨폰 · 데저트이글 2자루',
     role: '주인님을 따르는 명랑한 쌍권총',
     mbti: 'ESFP · 7w6',
-    partner: '공명자 미정',
-    quote: '주인님 주인님! 나비가 탕탕 쏴버릴까요?!',
-    desc: '• 원형: 데저트이글 2자루\n• 인간형: 주홍 단발 링 트윈, 녹안, 아이 같은 덩치, 작은 가슴, 고양이 귀 검은색 후드, 검은 반바지, 항상 웃음\n• 성격: ESFP · 7w6 (명랑함, 주인님 호칭)\n• 말투: 반말 + 하이톤 (흥분하면 말이 빨라짐)'
+    partner: 'USER',
+    summary: '데저트이글 2자루를 원형으로 하는 에고웨폰이다. 주홍색 단발 트윈과 녹색 눈, 아이 같은 체구에 고양이 귀가 달린 검은색 후드와 반바지 차림이다. 항상 밝은 미소를 띠며 주인을 다정하게 따른다.'
   },
   {
     id: 'E-03',
     code: 'M',
-    innerValue: '4', // 묵연=4
+    innerValue: '4',
     name: '묵연',
     group: 'e',
     type: '에고웨폰 · 칠흑 데스사이드',
     role: '칠흑의 사냥을 수행하는 과묵한 대낫',
     mbti: 'INFJ · 9w8',
-    partner: '공명자 미정',
-    quote: '명령을 내리십시오. 소멸시키겠습니다.',
-    desc: '• 원형: 칠흑 데스사이드\n• 인간형: 긴 어두운 녹발, 흑안, D컵, 라텍스 가죽 수트, 무표정\n• 성격: INFJ · 9w8 (과묵함, 침착함)\n• 말투: 존댓말, 짧음, 나긋함, 다나까체'
+    partner: 'USER',
+    summary: '칠흑의 데스사이드를 원형으로 삼은 에고웨폰이다. 긴 어두운 녹발과 흑안을 지녔고 라텍스 가죽 수트를 걸친 무표정한 인물이다. 과묵하고 침착한 태도로 주인의 전투를 묵묵히 보조한다.'
   },
   {
     id: 'E-04',
     code: 'T',
-    innerValue: '13', // 태현=13
+    innerValue: '13',
     name: '태현',
     group: 'e',
     type: '에고웨폰 · 티타늄 방패',
     role: '선우현의 탄탄한 티타늄 방패',
     mbti: 'ESTP · 7w8',
     partner: '선우현 (구천문청 S급)',
-    quote: '어이, 선우 형님. 내 뒤에 바짝 붙어있으라고.',
-    desc: '• 원형: 티타늄 방패\n• 공명자: 선우현\n• 인간형: 대충 쓸어넘긴 짧은 흑청발, 적안, 검정 선글라스, 거대 근육\n• 성격: ESTP · 7w8 (능구렁이 같은 유쾌함 + 느슨함)\n• 말투: 반말 + 능글맞음'
+    summary: '티타늄 방패를 원형으로 두고 구천문청 S급 선우현과 공명하는 존재이다. 짧은 흑청발에 적안, 검정 선글라스를 착용한 거대 근육 체형이다. 능구렁이 같은 유쾌함과 느슨한 분위기가 매력이다.'
   },
   {
     id: 'E-05',
     code: 'H',
-    innerValue: '1', // 헤이즐=1
+    innerValue: '1',
     name: '헤이즐',
     group: 'e',
     type: '에고웨폰 · 컴파운드 보우',
     role: '한채린의 정밀한 활',
     mbti: 'ESFP · 9w8',
     partner: '한채린 (구천문청 S급)',
-    quote: '채린 언니! 오늘 표적도 깔끔하게 꿰뚫어 볼까?',
-    desc: '• 원형: 컴파운드 보우\n• 공명자: 한채린\n• 인간형: 짙은 갈색 머리, 양갈래, 올리브그린 눈, 부드러운 인상\n• 성격: ESFP · 9w8 (발랄함, 수다스러움)\n• 말투: 반말 + 차분한 톤'
+    summary: '컴파운드 보우를 원형으로 삼고 구천문청 S급 한채린과 공명하는 존재이다. 짙은 갈색 양갈래 머리에 올리브그린 눈을 지녔으며 부드러운 인상을 풍긴다. 발랄하고 수다스러운 성격으로 주변을 환하게 밝힌다.'
   },
   {
     id: 'E-06',
     code: 'J',
-    innerValue: '3', // 잭=3
+    innerValue: '3',
     name: '잭',
     group: 'e',
     type: '에고웨폰 · 대검',
     role: '오세은의 대담한 대검',
     mbti: 'ESTP · 7w8',
     partner: '오세은 (ATLAS LINE S급)',
-    quote: '왜 그렇게 뻣뻣하게 굴어, 세은아? 나만 믿으라니까.',
-    desc: '• 원형: 대검\n• 공명자: 오세은\n• 인간형: 짧은 흑발, 호박색 눈, 그을린 피부, 크고 탄탄한 체구\n• 성격: ESTP · 7w8 (능글 + 대담 + 자신감 과잉)\n• 말투: 반말 + 능글맞은 농담 + 긁는 말'
+    summary: '대검을 원형으로 두고 아틀라스 라인 S급 오세은과 공명하는 존재이다. 짧은 흑발에 호박색 눈, 그을린 피부와 탄탄한 체구를 지녔다. 능글맞고 대담하며 자신감이 과잉되어 있는 편이다.'
   },
 
   // 구천문청
   {
     id: 'H-01',
     code: 'S',
-    innerValue: '8', // 선우현=8
+    innerValue: '8',
     name: '선우현',
     group: 'guchun',
     type: '구천문청 · S급 헌터',
     role: '완벽주의적인 원칙주의 관료',
+    age: '35세',
     mbti: 'ISTJ · 1w9',
     partner: '태현 (티타늄 방패)',
-    quote: '규정과 절차를 준수하십시오. 타협은 없습니다.',
-    desc: '• 나이/성별: 35세 / 남성\n• 랭크: S급 (구천문청, ∀ 정장)\n• 외형: 짧은 흑발, 적안\n• 성격: ISTJ · 1w9 (고지식함, 칼같은 완벽주의)\n• 말투: 딱딱한 존댓말 + 다나까체 + 타협 없는 어조'
+    summary: '구천문청 소속의 35세 S급 헌터이다. 단정한 짧은 흑발에 보라색 눈을 지녔으며, 고지식하고 칼같은 완벽주의를 고수하는 철저한 원칙주의 관료이다.'
   },
   {
     id: 'H-02',
     code: 'R',
-    innerValue: '12', // 한채린=12
+    innerValue: '12',
     name: '한채린',
     group: 'guchun',
     type: '구천문청 · S급 헌터',
     role: '철저하게 계산된 오만한 지략가',
+    age: '30세',
     mbti: 'ENTJ · 3w2',
     partner: '헤이즐 (컴파운드 보우)',
-    quote: '내 계산을 벗어난 변수는 존재하지 않습니다.',
-    desc: '• 나이/성별: 30세 / 여성\n• 랭크: S급 (구천문청, ∀ 정장)\n• 외형: 허리까지 내려오는 흑발 하이포니테일, 보라색 눈, 고양이상 미녀\n• 성격: ENTJ · 3w2 (오만함, 철저한 성과 중심)\n• 말투: 존댓말 + 느긋하고 도발적인 어조 + 다나까체'
+    summary: '구천문청 소속의 30세 S급 헌터이다. 허리까지 내려오는 갈색 하이포니테일에 빨간 눈을 가진 고양이상 미녀이다. 오만할 만큼 철저한 성과 중심적 성향을 지닌 지략가이다.'
   },
 
   // 해바라기 하우스
   {
     id: 'H-04',
     code: 'B',
-    innerValue: '9', // 박백수=9
+    innerValue: '9',
     name: '박백수',
     group: 'sunflower',
     type: '해바라기 하우스 · S급 헌터',
     role: '반지하 길드의 느긋한 아저씨 길드장',
+    age: '46세',
     mbti: 'ENTP · 9w8',
     partner: '-',
-    quote: '에이~ 뭘 그렇게 팍팍하게 굴어? 밥이나 먹고 해~',
-    desc: '• 나이/성별: 46세 / 남성\n• 랭크: S급 (해바라기 하우스 길드장)\n• 외형: 늘어져 보이는 트레이닝복 상하의, 덥수룩한 까치집 머리, 더러운 삼선 슬리퍼\n• 성격: ENTP · 9w8 (느긋함, 여유로움)\n• 말투: 반말 + 아재 특유의 친근·느릿·능글맞은 어조'
+    summary: '해바라기 하우스의 길드장이자 서류상 C급인 46세 남성 헌터이다. 늘어진 트레이닝복 차림에 덥수룩한 까치집 머리, 삼선슬리퍼를 고수하며 세상사에 여유가 넘친다.'
   },
   {
     id: 'H-05',
     code: 'HN',
-    innerValue: '10', // 윤희연=10
+    innerValue: '10',
     name: '윤희연',
     group: 'sunflower',
     type: '해바라기 하우스 · D급 헌터',
     role: '반지하를 지키는 순둥한 힐러',
+    age: '21세',
     mbti: 'ISFJ · 9w1',
     partner: '-',
-    quote: '저기... 오늘 청소는 제가 도와드릴까요...?',
-    desc: '• 나이/성별: 21세 / 여성\n• 랭크: D급 (해바라기 하우스)\n• 외형: 어깨 위 검은 단발 + 옆머리 귀여운 핀, 하늘색 눈, 순한 눈매, 후드티에 헤드폰\n• 성격: ISFJ · 9w1 (순둥함, 배려심)\n• 말투: 일상형 존댓말 + 부드러운 단어 + 해요체'
+    summary: '해바라기 하우스 소속의 21세 D급 헌터이다. 어깨 위 검은 단발머리에 귀여운 핀을 꽂았고, 하늘색 눈과 순한 눈매를 지녔다. 후드티와 헤드폰을 즐겨 착용하며 깊은 배려심을 가진 순둥한 성격이다.'
   },
 
   // ATLAS LINE
   {
     id: 'H-06',
     code: 'E',
-    innerValue: '11', // 오세은=11
+    innerValue: '11',
     name: '오세은',
     group: 'atlas',
     type: 'ATLAS LINE · S급 헌터',
     role: '자존심 높은 강아지상 정예 헌터',
+    age: '26세',
     mbti: 'INTJ · 3w4',
     partner: '잭 (대검)',
-    quote: '실력 없는 말에 쓸데없이 얹을 시간 없어.',
-    desc: '• 나이/성별: 26세 / 여성\n• 랭크: S급 (ATLAS LINE, ∀ 검은 제복)\n• 외형: 밀색 머리, 푸른 눈, 강아지상\n• 성격: INTJ · 3w4 (자존심 강함, 말수 적음)\n• 말투: 반말 + 낮고 차분함'
+    summary: '아틀라스 라인 소속의 26세 S급 헌터이다. 밀색 머리에 푸른 눈을 지닌 강아지상 외모를 가졌다. 강한 자존심과 적은 말수를 지녔으며 모든 임무에 철저하게 임한다.'
   },
 
   // 청연상단
   {
     id: 'H-08',
     code: 'JH',
-    innerValue: '2', // 유지한=2
+    innerValue: '2',
     name: '유지한',
     group: 'cheongyeon',
     type: '청연상단 (青淵商團) · S급 장인',
     role: '무기와 마력을 다루는 다정한 정갈한 미남',
+    age: '38세',
     mbti: 'ENTP · 9w8',
     partner: '-',
-    quote: '좋은 날이 서려면 정성이 필요한 법이지.',
-    desc: '• 나이/성별: 38세 / 남성\n• 랭크: S급 장인 (청연상단)\n• 외형: 흑발 포니테일, 보라색 눈, 정갈한 미남, 흰색 한복 + 가죽 앞치마\n• 성격: ENTP · 9w8 (차분함, 다정함, 능청스러움)\n• 말투: 반말 + 능청스러운 농담 + 잔잔함'
+    summary: '청연상단의 38세 S급 장인이다. 짙은 갈색 포니테일에 보라색 눈을 가진 정갈한 미남이며, 흰색 한복 위에 가죽 앞치마를 두르고 있다. 다정하고 능청스러운 태도가 매력적인 인물이다.'
   },
 
   // 미소속
   {
     id: 'H-10',
     code: 'C',
-    innerValue: '5', // 첸=5
+    innerValue: '5',
     name: '첸',
     group: 'unaffiliated',
     type: '미소속 · S급 헌터',
     role: '창파오를 입은 실눈의 미스터리 한량',
+    age: '나이 불명',
     mbti: 'ENTP · 9w8',
     partner: '-',
-    quote: '재미있는 소문이 들리던데~ 나도 끼워주려나?',
-    desc: '• 나이/성별: 나이 미상 / 남성\n• 랭크: S급 (미소속)\n• 외형: 길게 땋은 보라색 머리, 눈꼬리가 올라간 실눈, 슬림한 체격, 블랙 창파오 + 블랙 코트, 항상 웃는 인상\n• 성격: ENTP · 9w8 (한량, 친절함, 비밀주의)\n• 말투: 쾌활한 반말'
+    summary: '나이 미상의 미소속 S급 헌터이다. 길게 땋은 보라색 머리에 눈꼬리가 올라간 실눈, 슬림한 체격에 블랙 창파오와 코트를 걸친 항상 웃는 인상이다. 한쪽 귀의 붉은 매듭 귀걸이가 특징인 한량이다.'
   }
 ];
 
@@ -899,7 +987,7 @@ var T = [
 
 var tb = document.getElementById('tabs'), gr = document.getElementById('roster-grid');
 
-var GC = {e:'#63d6e8', guchun:'#63d6e8', atlas:'#9aa6ff', cheongyeon:'#e0705a', sunflower:'#f2b630', unaffiliated:'#b9c2d3'};
+var GC = {e:'#9aa6ff', guchun:'#63d6e8', atlas:'#9aa6ff', cheongyeon:'#e0705a', sunflower:'#f2b630', unaffiliated:'#b9c2d3'};
 
 // 바깥 카드리스트 이미지 URL (단독 번호 파일명)
 function getOuterCardImgUrl(value) {
@@ -965,29 +1053,53 @@ draw('all');
 
 // 모달 제어
 var overlay = document.getElementById('modal-overlay');
+var mBox = document.getElementById('modal-box');
 var mImg = document.getElementById('modal-img');
 var mTag = document.getElementById('modal-tag');
 var mTitle = document.getElementById('modal-title');
 var mDesc = document.getElementById('modal-desc');
-var mQuote = document.getElementById('modal-quote');
+var mLabel = document.getElementById('modal-label');
 var mAction = document.getElementById('modal-action');
+var mChips = document.getElementById('modal-chips');
+var mClose = document.getElementById('modal-close');
 var btnRosterGo = document.getElementById('btn-roster-go');
+var lastFocus = null;
+
+function esc(t) {
+  return String(t).replace(/[&<>"]/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]; });
+}
+
+function setModalImage(url, alt) {
+  mImg.onerror = function(){ mImg.style.display = 'none'; };
+  mImg.onload = function(){ mImg.style.display = 'block'; };
+  mImg.style.display = 'none';
+  mImg.alt = alt || '';
+  mImg.src = url || '';
+  if(!url) mImg.removeAttribute('src');
+}
+
+function openOverlay() {
+  lastFocus = document.activeElement;
+  overlay.classList.add('active');
+  document.body.classList.add('modal-open');
+  mBox.scrollTop = 0;
+  setTimeout(function(){ mClose.focus(); }, 50);
+}
 
 function openGuildModal(index) {
   var data = GuildData[index];
-  
-  if(data.img) {
-    mImg.src = data.img;
-    mImg.style.display = 'block';
-  } else {
-    mImg.style.display = 'none';
-  }
-  
+  mBox.style.setProperty('--c', GC[data.groupKey] || '#63d6e8');
+  mBox.classList.add('is-guild');
+
+  setModalImage(data.img, data.name);
   mTag.textContent = data.tag;
   mTitle.textContent = data.name;
+
+  mChips.innerHTML = '';
+  mLabel.style.display = 'none';
   mDesc.textContent = data.desc;
-  mQuote.style.display = 'none';
-  
+  mDesc.style.display = 'block';
+
   mAction.style.display = 'flex';
   btnRosterGo.onclick = function() {
     closeModal();
@@ -995,34 +1107,46 @@ function openGuildModal(index) {
     var rosterSec = document.getElementById('roster');
     if(rosterSec) rosterSec.scrollIntoView({ behavior: 'smooth' });
   };
-  
-  overlay.classList.add('active');
+
+  openOverlay();
 }
 
 function openCharModal(data) {
-  // 모달 팝업(카드 안) 상단 이미지는 code + 1 고정
-  var modalImgUrl = getModalImgUrl(data.code);
-  mImg.src = modalImgUrl;
-  mImg.style.display = 'block';
+  mBox.style.setProperty('--c', GC[data.group] || '#63d6e8');
+  mBox.classList.remove('is-guild');
 
-  mTag.textContent = data.id + ' · ' + data.type + (data.mbti ? ' [' + data.mbti + ']' : '');
+  // 팝업 상단 이미지는 code + 1 고정
+  setModalImage(getModalImgUrl(data.code), data.name);
+
+  mTag.textContent = data.id;
   mTitle.textContent = data.name;
-  mDesc.textContent = data.desc;
-  
-  if(data.quote) {
-    mQuote.textContent = '“' + data.quote + '”';
-    mQuote.style.display = 'block';
+
+  // 칩: 분류 / 나이(에고웨폰 제외) / MBTI / 파트너
+  var chips = '<span class="chip accent">' + esc(data.type) + '</span>';
+  if(data.age) chips += '<span class="chip"><i>AGE</i>' + esc(data.age) + '</span>';
+  if(data.mbti) chips += '<span class="chip"><i>MBTI</i>' + esc(data.mbti) + '</span>';
+  if(data.partner && data.partner !== '-') chips += '<span class="chip"><i>PARTNER</i>' + esc(data.partner) + '</span>';
+  mChips.innerHTML = chips;
+
+  // 통합 설명식 프로필 출력
+  if(data.summary) {
+    mLabel.style.display = 'flex';
+    mDesc.textContent = data.summary;
+    mDesc.style.display = 'block';
   } else {
-    mQuote.style.display = 'none';
+    mLabel.style.display = 'none';
+    mDesc.style.display = 'none';
   }
-  
+
   mAction.style.display = 'none';
-  overlay.classList.add('active');
+  openOverlay();
 }
 
 function closeModal(e) {
-  if(!e || e.target === overlay || e.target.classList.contains('modal-close')) {
+  if(!e || e.target === overlay || e.target.closest('.modal-close')) {
     overlay.classList.remove('active');
+    document.body.classList.remove('modal-open');
+    if(lastFocus && lastFocus.focus) lastFocus.focus();
   }
 }
 
