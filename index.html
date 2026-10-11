@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0d1017">
-<title>게이트 이후 · 헌터와 에고웨폰 아카이브</title>
+<title>에고웨폰과 함께하는 F급 헌터 생활! 아카이브</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -36,7 +36,7 @@ nav a:hover{color:var(--core)}
 /* Hero Header & 애니메이션 */
 .hero{padding:110px 0 90px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;background:radial-gradient(circle at 80% 20%, rgba(99,214,232,.05) 0%, transparent 60%)}
 .hero-tag{font-size:12px;color:var(--core);letter-spacing:.2em;text-transform:uppercase;font-weight:700;margin-bottom:12px}
-h1{font:900 clamp(36px,7vw,72px)/1.15 var(--serif);margin:0 0 20px;letter-spacing:-.02em}
+h1{font:900 clamp(36px,7vw,72px)/1.15 var(--serif);margin:0 0 36px;letter-spacing:-.02em}
 h1 small{display:block;font:400 clamp(16px,2.2vw,20px)/1.6 var(--serif);color:var(--mute);margin-top:20px}
 
 /* Hero 내부 요소 진입 애니메이션 */
@@ -153,7 +153,7 @@ section#roster{border-top:none}
 
 /* 05. 도시를 움직이는 세력 */
 .faction-list{display:flex;flex-direction:column}
-.faction-card{display:grid;grid-template-columns:60px 1fr;border-top:1px solid var(--line);padding:32px 0;cursor:pointer;position:relative}
+.faction-card{display:grid;grid-template-columns:60px 1fr;border-top:1px solid var(--line);padding:32px 0;position:relative}
 .faction-card:last-child{border-bottom:1px solid var(--line)}
 .faction-card::before{content:"";position:absolute;left:0;top:-1px;width:48px;height:2px;background:var(--c, var(--core));transition:width .35s cubic-bezier(.2,.7,.2,1)}
 .faction-card:hover::before{width:140px}
@@ -343,9 +343,10 @@ footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:no
   <div class="wrap">
     <div class="core" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
     <div class="hero-tag">THE URBAN FANTASY ARCHIVE</div>
-    <h1><span id="typing-title"></span><span class="typing-cursor"></span><small>마력으로 싸우고, 밥을 먹으며 회복하고,<br>무기와 마음을 나누는 헌터들의 기록.</small></h1>
-    <p class="lead">던전을 토벌하는 날도, 반지하 길드에서 잡일을 하는 날도 있다. 그리고 어느 날, 손에 쥔 무기가 말을 걸어온다.</p>
-    <div class="btn-group">
+    <h1><span id="typing-title"></span></h1>
+    <small style="display:block; font:400 clamp(16px,2.2vw,20px)/1.6 var(--serif); color:var(--mute); margin-top:20px;">　</small>
+
+    <div class="btn-group" style="margin-top:24px;">
       <a class="btn" href="#world">세계관 열람하기</a>
       <a class="btn alt" href="#roster">도감 보기</a>
     </div>
@@ -353,7 +354,7 @@ footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:no
       <div><b>7</b>등급 S~F</div>
       <div><b>4</b>핵심 세력</div>
       <div><b>에고웨폰</b>깨어난 무기</div>
-      <div><b>25일</b>월간 갱신</div>
+      <div><b>등급</b> 3개월마다 갱신</div>
     </div>
   </div>
 </header>
@@ -401,7 +402,7 @@ footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:no
     <div class="flow-box">
       <div><b>01. 붕괴</b>내부 공간이 현실로 폭발적으로 분출된다.</div>
       <div><b>02. 테라포밍</b>분출된 공간이 몬스터의 마력으로 현실을 덮는다.</div>
-      <div><b>03. 방어선 실패</b>2012년의 서울이 그 경고였다.</div>
+      <div><b>03. 방어선 실패</b>2012년의 서해, 그 시작이었다.</div>
     </div>
   </section>
 
@@ -567,11 +568,11 @@ footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:no
     <div class="sec-head">
       <span class="num">06 / THE FACTIONS</span>
       <h2>도시를 움직이는 세력</h2>
-      <p>같은 거리, 서로 다른 질서. 각 세력 카드를 클릭하면 세부 정보 팝업이 나타난다.</p>
+      <p>같은 거리, 서로 다른 질서.</p>
     </div>
     <div class="faction-list">
       
-      <div class="faction-card" style="--c:#9aa6ff" onclick="openGuildModal(0)">
+      <div class="faction-card" style="--c:#9aa6ff">
         <div class="faction-num">I</div>
         <div class="faction-body">
           <div class="sub-tag">국가 정부 직속 </div>
@@ -581,7 +582,7 @@ footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:no
         </div>
       </div>
 
-      <div class="faction-card" style="--c:#9aa6ff" onclick="openGuildModal(1)">
+      <div class="faction-card" style="--c:#9aa6ff">
         <div class="faction-num">II</div>
         <div class="faction-body">
           <div class="sub-tag">서양 기업형 초대형 길드 </div>
@@ -591,7 +592,7 @@ footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:no
         </div>
       </div>
 
-      <div class="faction-card" style="--c:#e0705a" onclick="openGuildModal(2)">
+      <div class="faction-card" style="--c:#e0705a">
         <div class="faction-num">III</div>
         <div class="faction-body">
           <div class="sub-tag">동양 장인 + 상단</div>
@@ -601,7 +602,7 @@ footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:no
         </div>
       </div>
 
-      <div class="faction-card" style="--c:#f2b630" onclick="openGuildModal(3)">
+      <div class="faction-card" style="--c:#f2b630">
         <div class="faction-num">IV</div>
         <div class="faction-body">
           <div class="sub-tag">주택가 반지하 소형 길드</div>
@@ -657,8 +658,8 @@ footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:no
 
 <footer>
   <div class="wrap">
-    <q>F급 헌터의 이름은 기억되지 않는다.<br>하지만 무기는 이름을 부른다.</q>
-    <p>GATE ARCHIVE · 헌터와 에고웨폰 세계관</p>
+    <q>F급 헌터의 이름은 기억되지 않는다.<br>무기는 당신의 이름을 찾는다.</q>
+    <p>GATE ARCHIVE · 에고웨폰과 함께하는 F급 헌터 생활</p>
     <a href="#top" style="color:var(--core)">▲ 맨 위로</a>
   </div>
 </footer>
@@ -690,7 +691,7 @@ footer q{display:block;font:500 18px/1.7 var(--serif);color:var(--ink);quotes:no
 <script>
 // 타이핑 효과
 (function typingEffect() {
-  var titleText = "게이트가 열린 서울,\n잠든 무기가 깨어났다";
+  var titleText = "게이트가 열린 그 날,\n잠든 무기가 깨어났다.";
   var container = document.getElementById("typing-title");
   var index = 0;
 
@@ -764,38 +765,6 @@ addEventListener('scroll',function(){
   var h=document.documentElement;
   pr.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
 },{passive:true});
-
-// 세력 / 길드 데이터
-var GuildData = [
-  {
-    tag: 'I / 국가 정부 직속',
-    name: '구천문청 (九天門廳)',
-    groupKey: 'guchun',
-    img: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200"><rect width="600" height="200" fill="%23131728"/><path d="M0,100 L600,100 M300,0 L300,200" stroke="%239aa6ff" stroke-width="1" opacity="0.15"/><circle cx="300" cy="100" r="60" stroke="%239aa6ff" stroke-width="1.5" fill="none" opacity="0.3"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%239aa6ff" font-family="sans-serif" font-size="20" letter-spacing="6" opacity="0.8">九天門廳 · GUCHUN</text></svg>',
-    desc: '강남 본청에 위치한 대한민국 헌터 관리 기구. 전국의 헌터 등급 부여 및 월간 실적 갱신, 게이트 수색과 통제를 총괄하는 행정 기관이다. 완벽한 행정주의와 서류 중심의 관리 체계를 고수한다.'
-  },
-  {
-    tag: 'II / 서양 기업형 초대형 길드',
-    name: 'ATLAS LINE (아틀라스 라인)',
-    groupKey: 'atlas',
-    img: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200"><rect width="600" height="200" fill="%23131728"/><path d="M0,0 L600,200 M0,200 L600,0" stroke="%239aa6ff" stroke-width="1" opacity="0.15"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%239aa6ff" font-family="sans-serif" font-size="20" letter-spacing="6" opacity="0.8">ATLAS LINE</text></svg>',
-    desc: '막강한 자본과 화력을 바탕으로 하는 글로벌 대형 길드. 고등급 헌터와 최첨단 무장, 레이드 정보를 독점하고 있으며, 엄격한 성과주의를 바탕으로 철저한 서열 중심의 운영을 펼친다.'
-  },
-  {
-    tag: 'III / 동양 장인 + 상단',
-    name: '청연상단 (青淵商團)',
-    groupKey: 'cheongyeon',
-    img: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200"><rect width="600" height="200" fill="%23221516"/><circle cx="300" cy="100" r="70" stroke="%23e0705a" stroke-width="2" fill="none" opacity="0.25"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23e0705a" font-family="sans-serif" font-size="20" letter-spacing="6" opacity="0.8">青淵商團 · CHEONGYEON</text></svg>',
-    desc: '전통 무기 제작과 마력 수리, 강화를 전문으로 하는 장인 집단. 헌터의 등급보다 다루는 무기의 가치와 관리 상태를 우선시하며, 정성이 담긴 무기라면 F급 헌터의 의뢰라도 귀빈으로 대접한다.'
-  },
-  {
-    tag: 'IV / 주택가 반지하 소형 길드',
-    name: '해바라기 하우스',
-    groupKey: 'sunflower',
-    img: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200"><rect width="600" height="200" fill="%23241c10"/><circle cx="300" cy="100" r="50" fill="%23f2b630" opacity="0.15"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23f2b630" font-family="sans-serif" font-size="20" letter-spacing="4" opacity="0.85">해바라기 하우스</text></svg>',
-    desc: '주택가 반지하에 조용히 자리 잡은 소규모 길드. D급 생활형 헌터들의 따뜻한 안식처이자, 일상 밀착형 의뢰와 하청을 전담하는 공간이다.'
-  }
-];
 
 // 캐릭터 데이터 (code: 캐릭터 코드 / innerValue: 바깥 프로필 카드 번호 1~13)
 var C = [
@@ -1084,31 +1053,6 @@ function openOverlay() {
   document.body.classList.add('modal-open');
   mBox.scrollTop = 0;
   setTimeout(function(){ mClose.focus(); }, 50);
-}
-
-function openGuildModal(index) {
-  var data = GuildData[index];
-  mBox.style.setProperty('--c', GC[data.groupKey] || '#63d6e8');
-  mBox.classList.add('is-guild');
-
-  setModalImage(data.img, data.name);
-  mTag.textContent = data.tag;
-  mTitle.textContent = data.name;
-
-  mChips.innerHTML = '';
-  mLabel.style.display = 'none';
-  mDesc.textContent = data.desc;
-  mDesc.style.display = 'block';
-
-  mAction.style.display = 'flex';
-  btnRosterGo.onclick = function() {
-    closeModal();
-    selectTabByGroup(data.groupKey);
-    var rosterSec = document.getElementById('roster');
-    if(rosterSec) rosterSec.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  openOverlay();
 }
 
 function openCharModal(data) {
